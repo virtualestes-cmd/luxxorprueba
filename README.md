@@ -23,7 +23,7 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 | 0.16 → 0.62 | El mar de nubes sube y se traga la villa |
 | 0.54 → 0.74 | El nombre **LUXXOR PROJECTS** aparece tenue sobre el cielo, con la fotografía dentro de las letras |
 | 0.64 → 0.88 | Un velo marfil cubre la escena |
-| 0.76 → 0.94 | El nombre se asienta a presencia plena sobre el blanco y entra **REAL ESTATE** |
+| 0.76 → 0.94 | El nombre se asienta a presencia plena sobre el blanco y entra **Real Estate** |
 
 El nombre no se marcha cuando llega el blanco: se queda y termina de
 asentarse encima, como en la referencia. Si se fuera, la última pantalla del
