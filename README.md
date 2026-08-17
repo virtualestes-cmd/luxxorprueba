@@ -40,7 +40,7 @@ assets/css/styles.css   Todo el diseño y toda la animación
 assets/js/hero.js       Solo calcula el progreso del scroll (0 → 1)
 assets/img/villa.webp   Fotografía de la villa (lo que carga la web)
 assets/img/villa.png    Original sin recortar, por si hay que re-exportar
-assets/img/clouds-*.png Nubes (lo que carga la web)
+assets/img/clouds-*.png Nubes: high (altas), low (mar de nubes), front (niebla de la base)
 assets/img/clouds-*.svg Fuente de las nubes, para regenerarlas
 assets/video/           Metraje del reel (ver el README de la carpeta)
 ```
@@ -109,8 +109,24 @@ tercero, hay que descargarlas a `assets/fonts/` y declararlas con `@font-face`.
 Las letras no son texto de color: son una ventana a `villa.webp`. El fondo de
 la caja se recorta a la forma de los glifos con `background-clip: text`, y el
 texto va en `transparent`. Las XX se quedan en dorado sólido porque son el
-rasgo del logotipo. Para cambiar qué se ve dentro de las letras basta con
-cambiar la imagen y el `background-position` de `.wordmark__word`.
+rasgo del logotipo.
+
+La imagen va **ampliada** (`background-size: 260%`), no en `cover`: a tamaño
+`cover` la villa entera cabía dentro de una sola letra y no se reconocía nada.
+Ampliada se ven fachadas, ventanas e interiores dentro de los glifos, que es
+el efecto de la referencia. Para cambiar qué se ve dentro basta con mover el
+`background-position` de `.wordmark__word`, o cambiar la imagen.
+
+## La niebla de la base
+
+La fotografía de la villa se corta en seco donde acaba la piscina. Lo tapa
+`.villa__mist`, unos cúmulos que van **dentro** de `.villa`, no como capa
+aparte: así viajan con ella y no añaden otra capa a pantalla completa que
+componer en cada fotograma (medido: como capa suelta costaba 11 ms por
+fotograma; dentro de la villa, nada).
+
+Lleva fundido arriba y abajo porque se recorta por los dos lados, y sin él su
+propio canto inferior cruzaba la pantalla como una línea recta al subir.
 
 ## Pendiente
 

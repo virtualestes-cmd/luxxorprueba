@@ -134,10 +134,10 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   top: 0;
   left: 0;
+  /* Lo justo para que el desplazamiento de un mosaico no deje hueco:
+     ancho >= 1 pantalla + 1 mosaico (1.9), y algo de alto de sobra porque
+     el fondo solo se pinta dentro de la caja del elemento. */
   width: 400%;
-  /* Más alta que la pantalla: el fondo solo se pinta dentro de la caja del
-     elemento, así que si la caja mide justo 100% su borde inferior asoma
-     como una línea recta en cuanto la capa sube o escala. */
   height: 140%;
   background-repeat: repeat-x;
   will-change: transform;
@@ -166,9 +166,10 @@ a { color: inherit; text-decoration: none; }
 .clouds--low .clouds__drift {
   background-image: url('../img/clouds-low.png');
   background-size: 62.5% auto;   /* = 250% del ancho de pantalla */
-  background-position: 0 46vh;
+  background-position: 0 64vh;
   animation: drift-low 150s linear infinite;
 }
+
 
 /* El desplazamiento es exactamente un mosaico, así que el bucle no salta. */
 @keyframes drift-high {
@@ -206,7 +207,7 @@ a { color: inherit; text-decoration: none; }
 /* La base se disuelve con una máscara, no con una franja: así la villa
    "nace" de las nubes sin dejar ningún borde recto. El fundido arranca en
    el borde de la piscina, que es donde termina el edificio. */
-.villa img {
+.villa__photo {
   display: block;
   width: 100%;
   height: auto;
@@ -214,6 +215,29 @@ a { color: inherit; text-decoration: none; }
      arriba, y con un fundido corto su base se ve como un recorte. */
   -webkit-mask-image: linear-gradient(180deg, #000 40%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.18) 88%, transparent 100%);
           mask-image: linear-gradient(180deg, #000 40%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.18) 88%, transparent 100%);
+}
+
+
+/* Cúmulos pegados a la base, por delante de la fotografía. La villa se
+   corta en seco donde acaba la piscina; esto lo oculta. Va dentro de
+   .villa a propósito: así viaja con ella sin ser otra capa a pantalla
+   completa que componer en cada fotograma. */
+.villa__mist {
+  position: absolute;
+  left: -14%;
+  bottom: -12%;
+  width: 128%;
+  /* Altura corta y recorte: solo interesa la franja de cúmulos. En auto la
+     nube mide casi el doble que la villa y la vela entera. */
+  height: 30%;
+  object-fit: cover;
+  object-position: 50% 62%;
+  pointer-events: none;
+  /* Se recorta arriba y abajo, así que necesita fundido en los dos bordes:
+     al subir con la villa, el canto inferior cruzaba la pantalla como una
+     línea recta. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 68%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 68%, transparent 100%);
 }
 
 
@@ -355,9 +379,7 @@ a { color: inherit; text-decoration: none; }
   top: 47%;
   width: 100%;
   text-align: center;
-  transform:
-    translate3d(-50%, calc(-50% + (1 - var(--p-settle)) * 2.5vh), 0)
-    scale(calc(0.94 + var(--p-mark) * 0.04 + var(--p-settle) * 0.02));
+  transform: translate3d(-50%, calc(-50% + (1 - var(--p-settle)) * 2.5vh), 0);
   /* Primero se insinúa sobre el cielo; con el blanco ya puesto, presencia plena. */
   opacity: calc(var(--p-mark) * 0.42 + var(--p-settle) * 0.58);
   will-change: transform, opacity;
@@ -366,20 +388,24 @@ a { color: inherit; text-decoration: none; }
 /* Las letras son una ventana a la fotografía: el fondo de la caja se recorta
    a la forma de los glifos con background-clip. La imagen se posiciona sobre
    la fachada acristalada, que es la zona con más detalle y contraste. */
+/* Ocupa el ancho de la pantalla, como en la referencia. La imagen dentro va
+   ampliada (no "cover") para que se vean fachadas y ventanas dentro de los
+   glifos; a tamaño "cover" la villa entera cabía dentro de una letra y no
+   se reconocía nada. */
 .wordmark__word {
   display: block;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(3.6rem, 15vw, 13rem);
-  line-height: .92;
-  letter-spacing: calc(.16em - var(--p-mark) * .08em);
-  text-indent: calc(.16em - var(--p-mark) * .08em);
+  font-size: clamp(4.4rem, 21vw, 21rem);
+  line-height: .88;
+  letter-spacing: .04em;
+  text-indent: .04em;
 
   background-image:
-    linear-gradient(rgba(6, 27, 54, .30), rgba(6, 27, 54, .30)),
+    linear-gradient(rgba(6, 27, 54, .22), rgba(6, 27, 54, .22)),
     url('../img/villa.webp');
-  background-size: cover;
-  background-position: center 62%;
+  background-size: 260% auto;
+  background-position: 48% 66%;
   -webkit-background-clip: text;
           background-clip: text;
   color: transparent;
@@ -395,13 +421,13 @@ a { color: inherit; text-decoration: none; }
 
 .wordmark__descriptor {
   display: block;
-  margin-top: .5em;
+  margin-top: .9em;
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(.9rem, 2.6vw, 2.1rem);
+  font-size: clamp(.72rem, 1.5vw, 1.15rem);
   text-transform: uppercase;
-  letter-spacing: .62em;
-  text-indent: .62em;
+  letter-spacing: .58em;
+  text-indent: .58em;
   /* En el logotipo el descriptor va en dorado, pero a este tamaño cae justo
      sobre la piedra clara de la villa y se pierde. Navy atenuado mantiene la
      jerarquía (más discreto que LUXXOR) sin perder legibilidad. */
@@ -412,12 +438,12 @@ a { color: inherit; text-decoration: none; }
    pegado al nombre. Entra al final, cuando el fondo ya es blanco. */
 .wordmark__sector {
   display: block;
-  margin-top: .5rem;
+  margin-top: .55rem;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(1.5rem, 5vw, 4.2rem);
-  line-height: 1.05;
-  letter-spacing: .02em;
+  font-size: clamp(1rem, 2.3vw, 1.85rem);
+  line-height: 1.1;
+  letter-spacing: .04em;
   color: rgba(22, 25, 29, .58);
   opacity: var(--p-settle);
   transform: translate3d(0, calc((1 - var(--p-settle)) * 1.4rem), 0);
