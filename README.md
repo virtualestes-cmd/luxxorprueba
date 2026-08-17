@@ -22,7 +22,7 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 | 0 → 0.70 | La villa asciende, se acerca y sale por arriba |
 | 0.16 → 0.62 | El mar de nubes sube y se traga la villa |
 | 0.44 → 0.62 | El nombre **LUXXOR** se insinúa entre las nubes, apenas visible |
-| 0.58 → 0.76 | Llega a presencia plena, con la arquitectura dentro de las letras |
+| 0.58 → 0.76 | Llega a presencia plena, con la arquitectura dentro de las letras y **Real Estate** debajo |
 | 0.80 → 0.98 | Las nubes suben y se lo tragan, entregando la pantalla a la sección siguiente |
 
 Después del hero vienen dos secciones: el **reel** (pieza en movimiento, ahora
@@ -108,9 +108,15 @@ texto va en `transparent`. **Todas** las letras llevan la fotografía dentro,
 también las XX: el dorado se queda en el logotipo de la navegación, que es
 donde el sistema visual lo pide.
 
-Va en Playfair Display 700, no en Cormorant: el logotipo tiene astas robustas
-y Cormorant es de trazo fino. Y es ancho más que alto —tamaño contenido con
-mucho tracking—, como el logotipo.
+**Va en sans, no en serif.** En la referencia el nombre es una sans muy
+gruesa y compacta, con las letras casi pegadas: Inter 900 con tracking
+negativo. Con una serif de trazo fino y espaciada no hay superficie dentro de
+los glifos donde se vea la fotografía, y el efecto no se lee por mucho que se
+ajuste el tamaño.
+
+El bloque son dos líneas, como la referencia: el nombre y **Real Estate**
+debajo, en sans sólida gris, a alrededor del 40% de su altura. El descriptor
+del logotipo se queda en la navegación.
 
 La imagen va **ampliada** (`background-size: 260%`), no en `cover`: a tamaño
 `cover` la villa entera cabía dentro de una sola letra y no se reconocía nada.

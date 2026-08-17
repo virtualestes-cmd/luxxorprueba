@@ -14,7 +14,7 @@
   /* Tipografía (§5) */
   --serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --display:'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --display: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
   /* Progreso del scroll del hero: 0 = arriba del todo, 1 = hero consumido.
      Lo actualiza assets/js/hero.js */
@@ -393,24 +393,24 @@ a { color: inherit; text-decoration: none; }
    ampliada (no "cover") para que se vean fachadas y ventanas dentro de los
    glifos; a tamaño "cover" la villa entera cabía dentro de una letra y no
    se reconocía nada. */
-/* Grueso y ancho, no alto: el logotipo tiene astas robustas y mucho tracking.
-   Todas las letras llevan la fotografía dentro —también las XX— porque es el
-   efecto espejo de la referencia; el dorado se queda en el logotipo de la
-   navegación, donde sí manda. */
+/* En la referencia el nombre es una sans muy gruesa y compacta, con las
+   letras casi pegadas — no una serif espaciada. El bloque macizo es lo que
+   deja ver la fotografía por dentro: con trazo fino no hay superficie donde
+   se vea nada. */
 .wordmark__word {
   display: block;
   font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(3rem, 13.5vw, 13rem);
-  line-height: .94;
-  letter-spacing: .10em;
-  text-indent: .10em;
+  font-weight: 900;
+  font-size: clamp(3.2rem, 13vw, 12rem);
+  line-height: .92;
+  letter-spacing: -.015em;
+  text-indent: 0;
 
   background-image:
-    linear-gradient(rgba(6, 27, 54, .18), rgba(6, 27, 54, .18)),
+    linear-gradient(rgba(6, 27, 54, .12), rgba(6, 27, 54, .12)),
     url('../img/villa.webp');
-  background-size: 210% auto;
-  background-position: 50% 64%;
+  background-size: 190% auto;
+  background-position: 50% 62%;
   -webkit-background-clip: text;
           background-clip: text;
   color: transparent;
@@ -431,17 +431,17 @@ a { color: inherit; text-decoration: none; }
   color: rgba(6, 27, 54, .72);
 }
 
-/* "Real Estate" bajo el logotipo, como en la referencia: grande, sólido y
-   pegado al nombre. Entra al final, cuando el fondo ya es blanco. */
+/* Segunda línea, como en la referencia: sans, sólida, gris oscuro y pegada
+   al nombre. Alrededor del 40% de su altura. */
 .wordmark__sector {
   display: block;
-  margin-top: .55rem;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(1rem, 2.3vw, 1.85rem);
-  line-height: 1.1;
-  letter-spacing: .04em;
-  color: rgba(22, 25, 29, .58);
+  margin-top: .1em;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.3rem, 5.2vw, 4.8rem);
+  line-height: 1;
+  letter-spacing: -.01em;
+  color: rgba(30, 41, 56, .82);
   opacity: var(--p-settle);
   transform: translate3d(0, calc((1 - var(--p-settle)) * 1.4rem), 0);
 }
