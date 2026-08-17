@@ -101,53 +101,71 @@ a { color: inherit; text-decoration: none; }
     rgba(214, 163, 74, 0.22) 32%,
     rgba(214, 163, 74, 0)    68%
   );
-  filter: blur(6px);
 }
 
 
 /* ============================================================
    3. NUBES
    ------------------------------------------------------------
-   Dos capas de ruido fractal (SVG feTurbulence) en lugar de formas
-   dibujadas: así la silueta no se repite ni se lee como un globo.
-   Deriva horizontal con keyframes; el movimiento vertical lo manda
-   el progreso del scroll.
+   Dos capas de ruido fractal en lugar de formas dibujadas: así la
+   silueta no se repite ni se lee como un globo.
+
+   Los .png son el ruido ya rasterizado. Los .svg de al lado son la
+   fuente: si se usan directamente, el navegador recalcula el filtro
+   feTurbulence cada vez que la capa cambia de escala, y eso solo ya
+   bajaba el hero a 6 fps. Para regenerarlos, ver el README.
    ============================================================ */
 
 .clouds {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  overflow: hidden;
+}
+
+/* Capa interior: cuatro pantallas de ancho, con la textura repetida. Es la
+   que deriva, y lo hace con transform — que la GPU compone sin repintar.
+   Animar background-position obliga a repintar la pantalla entera en cada
+   fotograma y hunde el rendimiento. */
+.clouds__drift {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 100%;
   background-repeat: repeat-x;
   will-change: transform;
 }
 
 /* --- nubes altas: mitad superior, lentas, casi disueltas en el azul --- */
-.clouds--high {
-  background-image: url('../img/clouds-high.svg');
-  background-size: 190% auto;
+.clouds--high { opacity: .85; transform: translate3d(0, calc(var(--p) * -16vh), 0); }
+.clouds--high .clouds__drift {
+  background-image: url('../img/clouds-high.png');
+  background-size: 47.5% auto;   /* = 190% del ancho de pantalla */
   background-position: 0 18vh;
-  opacity: .85;
-  transform: translate3d(0, calc(var(--p) * -16vh), 0);
-  animation: drift 220s linear infinite;
+  animation: drift-high 220s linear infinite;
 }
 
 /* --- mar de nubes: envuelve la base de la villa y se abre al scrollear --- */
 .clouds--low {
-  background-image: url('../img/clouds-low.svg');
-  background-size: 250% auto;
-  background-position: 0 46vh;
-  opacity: 1;
   transform: translate3d(0, calc(var(--p) * 5vh), 0) scale(calc(1 + var(--p) * 0.5));
   transform-origin: 50% 100%;
-  animation: drift 150s linear infinite reverse;
+}
+.clouds--low .clouds__drift {
+  background-image: url('../img/clouds-low.png');
+  background-size: 62.5% auto;   /* = 250% del ancho de pantalla */
+  background-position: 0 46vh;
+  animation: drift-low 150s linear infinite;
 }
 
-/* Deriva horizontal continua. Al mover solo background-position no se
-   recalcula el layout, así que el coste es prácticamente nulo. */
-@keyframes drift {
-  from { background-position-x: 0; }
-  to   { background-position-x: -190%; }
+/* El desplazamiento es exactamente un mosaico, así que el bucle no salta. */
+@keyframes drift-high {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-47.5%, 0, 0); }
+}
+@keyframes drift-low {
+  from { transform: translate3d(-62.5%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
 }
 
 
@@ -268,8 +286,7 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   transform: translate3d(-50%, calc(var(--p-copy) * -8vh), 0);
   opacity: calc(1 - var(--p-copy));
-  filter: blur(calc(var(--p-copy) * 8px));
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .hero__title {
@@ -300,7 +317,6 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: .18em;
   text-transform: uppercase;
   background: rgba(6, 27, 54, .35);
-  backdrop-filter: blur(2px);
   transition: background-color .5s ease, color .5s ease;
 }
 .btn__arrow { transition: transform .5s cubic-bezier(.22,.61,.36,1); }

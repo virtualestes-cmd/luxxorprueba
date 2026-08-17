@@ -15,7 +15,10 @@
   // Respetamos la preferencia del sistema: sin movimiento, sin motor.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var root = document.documentElement;
+  // Las variables se escriben en el escenario del hero, no en :root: así el
+  // recálculo de estilos se queda dentro del hero en vez de invalidar la
+  // página entera en cada fotograma.
+  var stage = hero.querySelector('.hero__stage') || document.documentElement;
   var ticking = false;
 
   /** Normaliza v dentro del tramo [a, b] devolviendo 0 → 1. */
@@ -37,14 +40,14 @@
     var travel = hero.offsetHeight - window.innerHeight;
     var p = travel > 0 ? Math.min(Math.max(scrolled / travel, 0), 1) : 0;
 
-    root.style.setProperty('--p', p.toFixed(4));
+    stage.style.setProperty('--p', p.toFixed(4));
 
     // Tramos de la secuencia (los mismos beats que el vídeo de referencia)
-    root.style.setProperty('--p-copy',     ease(range(p, 0.00, 0.30)).toFixed(4)); // se va el titular
-    root.style.setProperty('--p-villa',    ease(range(p, 0.00, 0.80)).toFixed(4)); // sube la villa
-    root.style.setProperty('--p-mark',     ease(range(p, 0.32, 0.58)).toFixed(4)); // entra el wordmark
-    root.style.setProperty('--p-mark-out', ease(range(p, 0.78, 0.95)).toFixed(4)); // sale el wordmark
-    root.style.setProperty('--p-veil',     ease(range(p, 0.72, 1.00)).toFixed(4)); // velo final
+    stage.style.setProperty('--p-copy',     ease(range(p, 0.00, 0.30)).toFixed(4)); // se va el titular
+    stage.style.setProperty('--p-villa',    ease(range(p, 0.00, 0.80)).toFixed(4)); // sube la villa
+    stage.style.setProperty('--p-mark',     ease(range(p, 0.32, 0.58)).toFixed(4)); // entra el wordmark
+    stage.style.setProperty('--p-mark-out', ease(range(p, 0.78, 0.95)).toFixed(4)); // sale el wordmark
+    stage.style.setProperty('--p-veil',     ease(range(p, 0.72, 1.00)).toFixed(4)); // velo final
   }
 
   function onScroll() {

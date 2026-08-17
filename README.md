@@ -31,7 +31,8 @@ index.html              Marcado del hero + adelanto de la sección siguiente
 assets/css/styles.css   Todo el diseño y toda la animación
 assets/js/hero.js       Solo calcula el progreso del scroll (0 → 1)
 assets/img/villa.svg    Placeholder de la arquitectura
-assets/img/clouds-*.svg Nubes generadas con ruido fractal (feTurbulence)
+assets/img/clouds-*.png Nubes (lo que carga la web)
+assets/img/clouds-*.svg Fuente de las nubes, para regenerarlas
 ```
 
 El reparto es a propósito: **el JS no anima nada**. Publica el progreso del
@@ -63,8 +64,31 @@ marca en el cenit y baja a azul, azul pálido y bruma cálida en el horizonte.
 Las nubes no son formas dibujadas: son dos capas de ruido fractal generado con
 `feTurbulence`, recortado con una curva de contraste (`feComponentTransfer`)
 para que aparezcan siluetas en vez de niebla. Al no ser figuras, no se repiten
-de forma reconocible. Para cambiarlas se tocan `baseFrequency` (tamaño de las
-nubes) y el `slope`/`intercept` de la curva (cuántas y cómo de densas).
+de forma reconocible.
+
+Los `.svg` son la fuente y los `.png` son lo que carga la web. El ruido se
+rasteriza una sola vez: si el navegador tiene que calcularlo en cada fotograma,
+el hero se arrastra. Para cambiar las nubes se editan los `.svg` —
+`baseFrequency` manda en el tamaño y el `slope`/`intercept` de la curva en
+cuántas hay y cómo de densas— y luego se vuelven a exportar a `.png` al mismo
+tamaño, con fondo transparente.
+
+## Rendimiento
+
+El hero mueve varias capas a pantalla completa, así que hay tres reglas que no
+conviene romper:
+
+1. **Animar solo `transform` y `opacity`.** Son las dos propiedades que la GPU
+   compone sin repintar. La deriva de las nubes se hacía con
+   `background-position` y costaba un repintado de pantalla completa por
+   fotograma; ahora es un `translateX` sobre una capa interior más ancha.
+2. **Nada de `filter` ni `backdrop-filter` sobre elementos que se mueven.**
+   Un `blur()` animado sobre el titular obliga a rasterizarlo en cada
+   fotograma.
+3. **Ningún filtro SVG en caliente.** El ruido de las nubes va horneado a PNG.
+
+Medido con scroll automatizado a 1440x900 y sin GPU: de 168 ms por fotograma
+(unos 6 fps) a 17 ms (el techo de 60 fps).
 
 Las tipografías se cargan desde Google Fonts. Si se prefiere no depender de un
 tercero, hay que descargarlas a `assets/fonts/` y declararlas con `@font-face`.

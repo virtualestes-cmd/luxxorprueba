@@ -58,6 +58,17 @@ El JS no anima nada: calcula el progreso del scroll (0 → 1) y lo expone en `--
 `--p-copy`, `--p-villa`, `--p-mark`, `--p-mark-out`, `--p-veil`. Toda la animación vive en
 el CSS. Para cambiar el ritmo se tocan los tramos de `hero.js`; para el aspecto, el CSS.
 
+## Rendimiento del hero
+
+Son varias capas a pantalla completa. Antes de añadir efectos:
+
+- Animar **solo `transform` y `opacity`**. Nunca `background-position`,
+  `width`, `top` ni similares.
+- **Nada de `filter` ni `backdrop-filter` sobre elementos en movimiento.**
+- **Ningún filtro SVG en caliente**: el ruido de las nubes va horneado a PNG.
+
+Saltarse esto llevó el hero de 60 fps a 6 fps.
+
 ## Pendiente
 
 - Fotografía real de la villa en lugar de `assets/img/villa.svg` (placeholder evidente).
