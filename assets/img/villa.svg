@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-label="Villa contemporánea de lujo">
+  <!--
+    Placeholder de arquitectura para el hero de Luxxor Vacation.
+    Está pensado para sustituirse por una fotografía real (villa recortada
+    sobre fondo transparente) sin tocar el CSS: mismo <img>, misma caja.
+  -->
+  <defs>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBF8F1"/>
+      <stop offset="1" stop-color="#DCD2C2"/>
+    </linearGradient>
+    <linearGradient id="stoneShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E4DACA"/>
+      <stop offset="1" stop-color="#C4B7A4"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#123255"/>
+      <stop offset="0.55" stop-color="#0A2342"/>
+      <stop offset="1"   stop-color="#061B36"/>
+    </linearGradient>
+    <linearGradient id="glassLit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8C489" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#D6A34A" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7FA8B8"/>
+      <stop offset="1" stop-color="#3E6B80"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ================= VOLUMEN SUPERIOR ================= -->
+  <!-- losa de cubierta con vuelo -->
+  <rect x="286" y="168" width="548" height="16" fill="url(#stone)"/>
+  <rect x="286" y="184" width="548" height="5" fill="#C0B29E"/>
+  <line x1="286" y1="168" x2="834" y2="168" stroke="#D6A34A" stroke-width="1.6" opacity="0.75"/>
+
+  <!-- cuerpo superior -->
+  <rect x="318" y="189" width="484" height="132" fill="url(#stone)"/>
+  <rect x="318" y="189" width="484" height="132" fill="none" stroke="#C7B9A5" stroke-width="1"/>
+
+  <!-- ventanal superior -->
+  <rect x="352" y="212" width="416" height="86" fill="url(#glass)"/>
+  <rect x="352" y="212" width="416" height="86" fill="url(#glassLit)" opacity="0.85"/>
+  <g stroke="#F3EDE1" stroke-width="2" opacity="0.55">
+    <line x1="456" y1="212" x2="456" y2="298"/>
+    <line x1="560" y1="212" x2="560" y2="298"/>
+    <line x1="664" y1="212" x2="664" y2="298"/>
+  </g>
+  <rect x="352" y="212" width="416" height="86" fill="none" stroke="#D6A34A" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- ================= TERRAZA INTERMEDIA ================= -->
+  <rect x="222" y="321" width="756" height="14" fill="url(#stoneShade)"/>
+  <line x1="222" y1="321" x2="978" y2="321" stroke="#D6A34A" stroke-width="1.4" opacity="0.6"/>
+
+  <!-- barandilla de vidrio de la terraza -->
+  <rect x="222" y="286" width="92" height="35" fill="#9FB4C4" opacity="0.32"/>
+  <rect x="806" y="286" width="172" height="35" fill="#9FB4C4" opacity="0.32"/>
+  <g stroke="#F3EDE1" stroke-width="1" opacity="0.5">
+    <line x1="268" y1="286" x2="268" y2="321"/>
+    <line x1="862" y1="286" x2="862" y2="321"/>
+    <line x1="920" y1="286" x2="920" y2="321"/>
+  </g>
+
+  <!-- jardineras de la terraza -->
+  <g fill="#24463C">
+    <path d="M236 286 q14-26 30-2 q16-24 30 2 z"/>
+    <path d="M834 286 q16-30 34-2 q18-26 34 2 z"/>
+    <ellipse cx="908" cy="278" rx="26" ry="12" opacity="0.85"/>
+  </g>
+
+  <!-- ================= PLANTA BAJA / GRAN VENTANAL ================= -->
+  <rect x="222" y="335" width="756" height="148" fill="url(#glass)"/>
+
+  <!-- reflejo del cielo en el vidrio -->
+  <rect x="222" y="335" width="756" height="62" fill="#2E5C86" opacity="0.45"/>
+
+  <!-- luz cálida interior -->
+  <g fill="url(#glassLit)">
+    <rect x="286" y="372" width="120" height="92" opacity="0.92"/>
+    <rect x="556" y="360" width="150" height="104" opacity="0.8"/>
+    <rect x="820" y="380" width="104" height="84" opacity="0.88"/>
+  </g>
+
+  <!-- montantes -->
+  <g stroke="#EFE7D8" stroke-width="2.2" opacity="0.5">
+    <line x1="316" y1="335" x2="316" y2="483"/>
+    <line x1="410" y1="335" x2="410" y2="483"/>
+    <line x1="504" y1="335" x2="504" y2="483"/>
+    <line x1="598" y1="335" x2="598" y2="483"/>
+    <line x1="692" y1="335" x2="692" y2="483"/>
+    <line x1="786" y1="335" x2="786" y2="483"/>
+    <line x1="880" y1="335" x2="880" y2="483"/>
+  </g>
+  <rect x="222" y="335" width="756" height="148" fill="none" stroke="#D6A34A" stroke-width="1.2" opacity="0.55"/>
+
+  <!-- ================= LOSA / PLATAFORMA ================= -->
+  <rect x="150" y="483" width="900" height="26" fill="url(#stone)"/>
+  <rect x="150" y="509" width="900" height="10" fill="#B9AB97"/>
+  <line x1="150" y1="483" x2="1050" y2="483" stroke="#D6A34A" stroke-width="1.4" opacity="0.7"/>
+
+  <!-- ================= PISCINA DE BORDE INFINITO ================= -->
+  <rect x="264" y="519" width="672" height="46" fill="url(#water)" opacity="0.92"/>
+  <g stroke="#EAF3F6" stroke-width="2" opacity="0.35">
+    <line x1="320" y1="534" x2="520" y2="534"/>
+    <line x1="600" y1="546" x2="840" y2="546"/>
+    <line x1="380" y1="556" x2="700" y2="556"/>
+  </g>
+  <rect x="264" y="519" width="672" height="6" fill="#F3EDE1" opacity="0.6"/>
+
+  <!-- reflejo cálido del atardecer en el agua -->
+  <rect x="520" y="519" width="120" height="46" fill="#D6A34A" opacity="0.28"/>
+
+</svg>

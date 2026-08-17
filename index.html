@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxxor Vacation — Villas y residencias exclusivas</title>
+  <meta name="description" content="Luxxor Vacation. Villas y residencias exclusivas para estancias irrepetibles.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HERO ANIMADO
+       El bloque .hero mide varias pantallas de alto; dentro, .hero__stage
+       queda fijo (sticky) mientras se scrollea. El progreso del scroll
+       (0 → 1) se pasa a CSS como --p desde assets/js/hero.js.
+       ============================================================ -->
+  <div class="hero" id="hero">
+    <div class="hero__stage">
+
+      <!-- Cielo: navy arriba, golden hour en el horizonte -->
+      <div class="sky" aria-hidden="true"></div>
+      <div class="sky__glow" aria-hidden="true"></div>
+
+      <!-- Nubes traseras (lentas) -->
+      <div class="clouds clouds--back" aria-hidden="true">
+        <span class="cloud cloud--a"></span>
+        <span class="cloud cloud--b"></span>
+        <span class="cloud cloud--c"></span>
+      </div>
+
+      <!-- La villa que emerge de las nubes -->
+      <div class="villa" aria-hidden="true">
+        <img src="assets/img/villa.svg" alt="">
+      </div>
+
+      <!-- Nubes delanteras (rápidas, tapan la base de la villa) -->
+      <div class="clouds clouds--front" aria-hidden="true">
+        <span class="cloud cloud--d"></span>
+        <span class="cloud cloud--e"></span>
+        <span class="cloud cloud--f"></span>
+      </div>
+
+      <!-- Navegación -->
+      <header class="nav">
+        <a class="nav__logo" href="#" aria-label="Luxxor Vacation — inicio">
+          <span class="logo">
+            <span class="logo__word">LU<em>XX</em>OR</span>
+            <span class="logo__script">vacation</span>
+          </span>
+        </a>
+        <nav class="nav__links" aria-label="Principal">
+          <a href="#">Villas</a>
+          <a href="#">Destinos</a>
+          <a href="#">Experiencias</a>
+          <a href="#">Nosotros</a>
+        </nav>
+        <a class="nav__cta" href="#">Reservar</a>
+      </header>
+
+      <!-- Titular -->
+      <div class="hero__copy">
+        <h1 class="hero__title">Encuentra tu lugar<br>en el mundo</h1>
+        <p class="hero__sub">Villas y residencias exclusivas, seleccionadas una a una, para estancias irrepetibles.</p>
+        <a class="btn" href="#">Descubrir villas <span class="btn__arrow">&#8594;</span></a>
+      </div>
+
+      <!-- Wordmark que aparece al scrollear -->
+      <div class="wordmark" aria-hidden="true">
+        <span class="wordmark__word">LU<em>XX</em>OR</span>
+        <span class="wordmark__script">vacation</span>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="scrollhint" aria-hidden="true">
+        <span class="scrollhint__line"></span>
+        <span class="scrollhint__text">Scroll</span>
+      </div>
+
+      <!-- Velo final: funde el hero con la sección siguiente -->
+      <div class="veil" aria-hidden="true"></div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SIGUIENTE SECCIÓN (solo un adelanto, para ver la transición)
+       ============================================================ -->
+  <section class="intro">
+    <p class="intro__eyebrow">Luxxor Vacation</p>
+    <h2 class="intro__title">No alquilamos casas.<br>Damos acceso a lugares.</h2>
+    <p class="intro__text">
+      Una colección corta y muy elegida de villas privadas, áticos y residencias frente al mar.
+      Cada estancia se gestiona en privado, con la discreción de un servicio de concierge.
+    </p>
+  </section>
+
+  <script src="assets/js/hero.js"></script>
+</body>
+</html>
