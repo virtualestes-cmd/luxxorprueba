@@ -20,7 +20,7 @@
 
       <!-- Pendiente alta: cúmulos con borde, no bruma -->
       <feComponentTransfer>
-        <feFuncA type="linear" slope="9" intercept="-4.05"/>
+        <feFuncA type="linear" slope="8" intercept="-3.35"/>
       </feComponentTransfer>
     </filter>
 
@@ -28,9 +28,10 @@
          rectángulo sólido se ve como un velo recto sobre la fachada. -->
     <linearGradient id="bandFront" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0"    stop-color="#fff" stop-opacity="0"/>
-      <stop offset="0.30" stop-color="#fff" stop-opacity="0.45"/>
-      <stop offset="0.62" stop-color="#fff" stop-opacity="0.95"/>
-      <stop offset="1"    stop-color="#fff" stop-opacity="1"/>
+      <stop offset="0.28" stop-color="#fff" stop-opacity="0.65"/>
+      <stop offset="0.48" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="0.78" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1"    stop-color="#fff" stop-opacity="0.4"/>
     </linearGradient>
     <mask id="maskFront"><rect width="1600" height="900" fill="url(#bandFront)"/></mask>
   </defs>

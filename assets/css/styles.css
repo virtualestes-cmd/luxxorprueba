@@ -211,10 +211,11 @@ a { color: inherit; text-decoration: none; }
   display: block;
   width: 100%;
   height: auto;
-  /* Fundido largo: la villa acaba cruzando la pantalla entera al salir por
-     arriba, y con un fundido corto su base se ve como un recorte. */
-  -webkit-mask-image: linear-gradient(180deg, #000 40%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.18) 88%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 40%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.18) 88%, transparent 100%);
+  /* Fundido mínimo, solo para matar el canto duro del recorte. Un fundido
+     largo dejaba media casa translúcida, que es peor que el propio corte:
+     de taparla se encargan los cúmulos de .villa__mist. */
+  -webkit-mask-image: linear-gradient(180deg, #000 86%, rgba(0,0,0,.45) 96%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 86%, rgba(0,0,0,.45) 96%, transparent 100%);
 }
 
 
@@ -225,19 +226,18 @@ a { color: inherit; text-decoration: none; }
 .villa__mist {
   position: absolute;
   left: -14%;
-  bottom: -12%;
-  width: 128%;
-  /* Altura corta y recorte: solo interesa la franja de cúmulos. En auto la
-     nube mide casi el doble que la villa y la vela entera. */
-  height: 30%;
+  /* Colocada de forma que el canto inferior de la fotografía caiga hacia la
+     mitad de la nube: los cúmulos lo cruzan y por debajo todo es opaco. */
+  bottom: -20%;
+  width: 152%;
+  height: 48%;
   object-fit: cover;
-  object-position: 50% 62%;
+  object-position: 50% 58%;
   pointer-events: none;
-  /* Se recorta arriba y abajo, así que necesita fundido en los dos bordes:
-     al subir con la villa, el canto inferior cruzaba la pantalla como una
-     línea recta. */
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 68%, transparent 100%);
-          mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 68%, transparent 100%);
+  /* Difuminada por los dos bordes: si se deja el canto lleno, la propia nube
+     cruza la pantalla como una franja blanca recta. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 28%, #000 72%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 28%, #000 72%, transparent 100%);
 }
 
 

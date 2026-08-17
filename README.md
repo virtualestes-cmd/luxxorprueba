@@ -117,16 +117,23 @@ Ampliada se ven fachadas, ventanas e interiores dentro de los glifos, que es
 el efecto de la referencia. Para cambiar qué se ve dentro basta con mover el
 `background-position` de `.wordmark__word`, o cambiar la imagen.
 
-## La niebla de la base
+## Las nubes que tapan la base de la villa
 
-La fotografía de la villa se corta en seco donde acaba la piscina. Lo tapa
-`.villa__mist`, unos cúmulos que van **dentro** de `.villa`, no como capa
-aparte: así viajan con ella y no añaden otra capa a pantalla completa que
-componer en cada fotograma (medido: como capa suelta costaba 11 ms por
-fotograma; dentro de la villa, nada).
+La fotografía se corta en seco donde acaba la piscina. Se resuelve con dos
+cosas a la vez, y hacen falta las dos:
 
-Lleva fundido arriba y abajo porque se recorta por los dos lados, y sin él su
-propio canto inferior cruzaba la pantalla como una línea recta al subir.
+1. **Un fundido corto** en `.villa__photo`, solo el 14% final. Un fundido
+   largo dejaba media casa translúcida —se veía el cielo a través del agua—,
+   que queda peor que el propio corte.
+2. **Cúmulos densos por delante**, `.villa__mist`, colocados de forma que el
+   canto de la fotografía caiga en su franja más opaca.
+
+La nube va **dentro** de `.villa`, no como capa aparte: así viaja con ella y
+no añade otra capa a pantalla completa que componer en cada fotograma. Medido:
+como capa suelta costaba 11 ms por fotograma; dentro de la villa, nada.
+
+Lleva fundido en sus dos bordes. Con el canto inferior lleno, la propia nube
+cruzaba la pantalla como una franja blanca recta al subir con la villa.
 
 ## Pendiente
 
