@@ -1,5 +1,5 @@
 /* ============================================================
-   LUXXOR VACATION — Landing (hero animado)
+   LUXXOR PROJECTS — Landing (hero animado)
    Paleta y tipografía según el Design System de Luxxor.
    ============================================================ */
 
@@ -14,7 +14,6 @@
   /* Tipografía (§5) */
   --serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --script: 'Parisienne', 'Snell Roundhand', cursive;
 
   /* Progreso del scroll del hero: 0 = arriba del todo, 1 = hero consumido.
      Lo actualiza assets/js/hero.js */
@@ -69,16 +68,20 @@ a { color: inherit; text-decoration: none; }
 .sky {
   position: absolute;
   inset: -10% 0 -12% 0;   /* margen de sobra: el cielo se desplaza con el scroll */
+  /* Cielo real de última hora de la tarde: el navy de marca se queda en el
+     cenit y desde ahí baja a azul, azul pálido y bruma cálida en el horizonte. */
   background:
     linear-gradient(
       180deg,
-      #03101F   0%,
-      var(--navy) 22%,
-      #14385E   46%,
-      #4A6E90   64%,
-      #8FA3B0   78%,
-      #C9A87C   92%,
-      #E0C39A  100%
+      var(--navy) 0%,
+      #0E3A63    14%,
+      #1B5488    30%,
+      #3277A6    45%,
+      #6BA0C0    60%,
+      #A8C4D2    73%,
+      #D2CFC2    84%,
+      #E8D6B8    93%,
+      #F0DCBE   100%
     );
   transform: translate3d(0, calc(var(--p) * -6vh), 0);
 }
@@ -105,48 +108,47 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    3. NUBES
    ------------------------------------------------------------
-   Cada nube son varios radial-gradients superpuestos + blur.
-   Deriva horizontal con keyframes; el desplazamiento vertical
-   depende del scroll.
+   Dos capas de ruido fractal (SVG feTurbulence) en lugar de formas
+   dibujadas: así la silueta no se repite ni se lee como un globo.
+   Deriva horizontal con keyframes; el movimiento vertical lo manda
+   el progreso del scroll.
    ============================================================ */
 
-.clouds { position: absolute; inset: 0; pointer-events: none; }
-
-.cloud {
+.clouds {
   position: absolute;
-  display: block;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse 38% 60% at 26% 62%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
-    radial-gradient(ellipse 34% 78% at 48% 44%, rgba(255,255,255,.98), rgba(255,255,255,0) 72%),
-    radial-gradient(ellipse 40% 56% at 72% 60%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
-    radial-gradient(ellipse 60% 34% at 50% 76%, rgba(255,255,255,.88), rgba(255,255,255,0) 74%);
+  inset: 0;
+  pointer-events: none;
+  background-repeat: repeat-x;
   will-change: transform;
 }
 
-/* --- capa trasera: lenta, tenue, teñida por la luz del horizonte --- */
-.clouds--back {
-  filter: blur(16px);
-  transform: translate3d(0, calc(var(--p) * -14vh), 0);
+/* --- nubes altas: mitad superior, lentas, casi disueltas en el azul --- */
+.clouds--high {
+  background-image: url('../img/clouds-high.svg');
+  background-size: 190% auto;
+  background-position: 0 18vh;
+  opacity: .85;
+  transform: translate3d(0, calc(var(--p) * -16vh), 0);
+  animation: drift 220s linear infinite;
 }
-.clouds--back .cloud { opacity: .34; }
 
-.cloud--a { width: 52vw; height: 15vw; left: -10vw; top: 44vh; animation: drift-r 90s linear infinite; }
-.cloud--b { width: 42vw; height: 12vw; left: 60vw;  top: 34vh; animation: drift-l 120s linear infinite; opacity: .26; }
-.cloud--c { width: 60vw; height: 17vw; left: 20vw;  top: 56vh; animation: drift-r 150s linear infinite; }
-
-/* --- capa delantera: más grande, más blanca, tapa la base de la villa --- */
-.clouds--front {
-  filter: blur(10px);
-  transform: translate3d(0, calc(var(--p) * 6vh), 0) scale(calc(1 + var(--p) * 0.55));
+/* --- mar de nubes: envuelve la base de la villa y se abre al scrollear --- */
+.clouds--low {
+  background-image: url('../img/clouds-low.svg');
+  background-size: 250% auto;
+  background-position: 0 46vh;
+  opacity: 1;
+  transform: translate3d(0, calc(var(--p) * 5vh), 0) scale(calc(1 + var(--p) * 0.5));
   transform-origin: 50% 100%;
+  animation: drift 150s linear infinite reverse;
 }
-.cloud--d { width: 72vw; height: 22vw; left: -16vw; top: 66vh; animation: drift-r 70s linear infinite;  opacity: .8; }
-.cloud--e { width: 60vw; height: 19vw; left: 44vw;  top: 72vh; animation: drift-l 95s linear infinite;  opacity: .75; }
-.cloud--f { width: 92vw; height: 30vw; left: 6vw;   top: 84vh; animation: drift-r 130s linear infinite; opacity: .95; }
 
-@keyframes drift-r { from { margin-left: -4vw; } 50% { margin-left: 4vw; } to { margin-left: -4vw; } }
-@keyframes drift-l { from { margin-left: 4vw; }  50% { margin-left: -4vw; } to { margin-left: 4vw; } }
+/* Deriva horizontal continua. Al mover solo background-position no se
+   recalcula el layout, así que el coste es prácticamente nulo. */
+@keyframes drift {
+  from { background-position-x: 0; }
+  to   { background-position-x: -190%; }
+}
 
 
 /* ============================================================
@@ -207,11 +209,17 @@ a { color: inherit; text-decoration: none; }
   color: var(--ivory);
 }
 .logo__word em { font-style: normal; color: var(--gold); }
-.logo__script {
-  font-family: var(--script);
-  font-size: 1.15rem;
+/* Descriptor de vertical: serif, tracking muy amplio y presencia más
+   discreta que LUXXOR, como en el logotipo (§4 del design system). */
+.logo__descriptor {
+  font-family: var(--serif);
+  font-size: .72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .58em;
+  text-indent: .58em;
   color: var(--gold);
-  margin-top: -.15em;
+  margin-top: .35em;
 }
 
 .nav__links {
@@ -304,25 +312,6 @@ a { color: inherit; text-decoration: none; }
    7. WORDMARK (aparece al scrollear, como en la referencia)
    ============================================================ */
 
-/* Sombra suave detrás del wordmark: la villa queda muy grande a esa altura
-   y el texto necesita fondo. Es luz, no una caja. */
-.wordmark::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 150vw;
-  height: 90vh;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    rgba(3, 16, 31, .62) 0%,
-    rgba(3, 16, 31, .34) 45%,
-    rgba(3, 16, 31, 0)   72%
-  );
-  z-index: -1;
-}
-
 .wordmark {
   position: absolute;
   z-index: 3;
@@ -337,26 +326,33 @@ a { color: inherit; text-decoration: none; }
   will-change: transform, opacity;
 }
 
+/* Para cuando aparece el wordmark el cielo ya está claro, así que va en
+   navy con las XX doradas — la versión del logo para fondos claros. */
 .wordmark__word {
   display: block;
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 500;
   font-size: clamp(3.6rem, 15vw, 13rem);
   line-height: .92;
-  color: var(--ivory);
+  color: var(--navy);
   letter-spacing: calc(.16em - var(--p-mark) * .08em);
   text-indent: calc(.16em - var(--p-mark) * .08em);
-  text-shadow: 0 4px 60px rgba(3, 16, 31, .5);
 }
 .wordmark__word em { font-style: normal; color: var(--gold); }
 
-.wordmark__script {
+.wordmark__descriptor {
   display: block;
-  margin-top: -.12em;
-  font-family: var(--script);
-  font-size: clamp(2rem, 7.4vw, 6rem);
-  color: var(--gold);
-  text-shadow: 0 4px 40px rgba(3, 16, 31, .45);
+  margin-top: .5em;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(.9rem, 2.6vw, 2.1rem);
+  text-transform: uppercase;
+  letter-spacing: .62em;
+  text-indent: .62em;
+  /* En el logotipo el descriptor va en dorado, pero a este tamaño cae justo
+     sobre la piedra clara de la villa y se pierde. Navy atenuado mantiene la
+     jerarquía (más discreto que LUXXOR) sin perder legibilidad. */
+  color: rgba(6, 27, 54, .72);
 }
 
 
@@ -463,9 +459,8 @@ a { color: inherit; text-decoration: none; }
   .hero__copy { top: 26vh; }
   /* en vertical la villa necesita estar más arriba para asomar sobre las nubes */
   .villa { width: 150vw; bottom: -6vh; }
-  .cloud--d { top: 74vh; }
-  .cloud--e { top: 80vh; }
-  .cloud--f { top: 90vh; }
+  .clouds--low { background-size: 400% auto; background-position: 0 64vh; }
+  .clouds--high { background-size: 320% auto; }
 }
 
 
@@ -477,7 +472,7 @@ a { color: inherit; text-decoration: none; }
   html { scroll-behavior: auto; }
   .hero { height: 100vh; }
   .hero__stage { position: relative; }
-  .cloud { animation: none; }
+  .clouds { animation: none; }
   .scrollhint__line { animation: none; }
   .wordmark, .veil { display: none; }
 }

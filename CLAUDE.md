@@ -1,6 +1,7 @@
 # Luxxor — contexto del proyecto
 
-Web de **Luxxor Vacation**, la vertical de estancias privadas del ecosistema Luxxor.
+Web de **Luxxor Projects**, el núcleo del ecosistema Luxxor. Las verticales
+(Vacation, Hotels, Academy) entran después, colgando de esta.
 
 ## Antes de tocar diseño o copy
 
@@ -19,11 +20,11 @@ cualquier criterio genérico. Lo que sigue es solo el resumen operativo.
 
 ## Voz
 
-Inglés internacional, frases cortas, sin lenguaje turístico. "Private stays. Exceptional
-places." sí; "¡Vive unas vacaciones inolvidables!" no.
+Inglés internacional, frases cortas, sin lenguaje comercial. "Private access. Exceptional
+assets." sí; "Las mejores oportunidades del mercado" no.
 
-CTAs del repertorio de marca: DISCOVER THE COLLECTION · REQUEST AVAILABILITY ·
-PRIVATE ENQUIRY · VIEW PROPERTY.
+CTAs del repertorio de marca: EXPLORE COLLECTION · VIEW OPPORTUNITY · PRIVATE ENQUIRY ·
+REQUEST DETAILS. (REQUEST AVAILABILITY y VIEW PROPERTY son de Vacation.)
 
 ## Sistema visual
 
@@ -49,7 +50,7 @@ Landing estática, sin build ni dependencias. Se abre `index.html` y ya.
 index.html              Hero animado + adelanto de la sección siguiente
 assets/css/styles.css   Diseño y animación completos
 assets/js/hero.js       Solo publica el progreso del scroll como variables CSS
-assets/img/             Imágenes
+assets/img/             Villa (placeholder) y nubes de ruido fractal
 docs/                   Contexto de marca
 ```
 
@@ -60,4 +61,6 @@ el CSS. Para cambiar el ritmo se tocan los tramos de `hero.js`; para el aspecto,
 ## Pendiente
 
 - Fotografía real de la villa en lugar de `assets/img/villa.svg` (placeholder evidente).
+  El `<img>` y su máscara ya están preparados: basta con cambiar el archivo.
+- Logotipo en archivo. Ahora el wordmark está reconstruido con tipografía.
 - Resto de secciones de la home, según la secuencia del §18 del contexto de marca.

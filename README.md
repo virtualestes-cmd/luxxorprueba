@@ -1,6 +1,6 @@
-# Luxxor Vacation — Landing
+# Luxxor Projects — Landing
 
-Primera pantalla (hero animado) de la web de Luxxor Vacation.
+Primera pantalla (hero animado) de la web de Luxxor Projects.
 Es una prueba: HTML, CSS y JS planos, sin build ni dependencias.
 
 ## Cómo verlo
@@ -20,7 +20,7 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 |---------:|------------|
 | 0 → 0.30 | El titular y la navegación se desvanecen y se difuminan |
 | 0 → 0.80 | La villa asciende y se acerca; las nubes se abren |
-| 0.32 → 0.58 | Entra el wordmark **LUXXOR vacation** a pantalla completa |
+| 0.32 → 0.58 | Entra el wordmark **LUXXOR PROJECTS** a pantalla completa |
 | 0.78 → 0.95 | El wordmark se va |
 | 0.72 → 1.00 | Un velo marfil entrega la pantalla a la siguiente sección |
 
@@ -31,6 +31,7 @@ index.html              Marcado del hero + adelanto de la sección siguiente
 assets/css/styles.css   Todo el diseño y toda la animación
 assets/js/hero.js       Solo calcula el progreso del scroll (0 → 1)
 assets/img/villa.svg    Placeholder de la arquitectura
+assets/img/clouds-*.svg Nubes generadas con ruido fractal (feTurbulence)
 ```
 
 El reparto es a propósito: **el JS no anima nada**. Publica el progreso del
@@ -56,8 +57,14 @@ Sigue el documento interno de Luxxor:
 - Serif editorial (Cormorant Garamond) en titulares; sans (Inter) en interfaz.
 - Animaciones lentas y suaves, sin glow ni efectos futuristas.
 
-En vez del azul cielo del ejemplo de referencia, el cielo va de navy profundo
-a hora dorada en el horizonte: mismo mecanismo, paleta de la marca.
+El cielo es un degradado real de última hora de la tarde: arranca en el navy de
+marca en el cenit y baja a azul, azul pálido y bruma cálida en el horizonte.
+
+Las nubes no son formas dibujadas: son dos capas de ruido fractal generado con
+`feTurbulence`, recortado con una curva de contraste (`feComponentTransfer`)
+para que aparezcan siluetas en vez de niebla. Al no ser figuras, no se repiten
+de forma reconocible. Para cambiarlas se tocan `baseFrequency` (tamaño de las
+nubes) y el `slope`/`intercept` de la curva (cuántas y cómo de densas).
 
 Las tipografías se cargan desde Google Fonts. Si se prefiere no depender de un
 tercero, hay que descargarlas a `assets/fonts/` y declararlas con `@font-face`.
