@@ -50,7 +50,7 @@ Landing estática, sin build ni dependencias. Se abre `index.html` y ya.
 index.html              Hero animado + adelanto de la sección siguiente
 assets/css/styles.css   Diseño y animación completos
 assets/js/hero.js       Solo publica el progreso del scroll como variables CSS
-assets/img/             Villa (placeholder) y nubes de ruido fractal
+assets/img/             Fotografía de la villa y nubes
 docs/                   Contexto de marca
 ```
 
@@ -71,7 +71,7 @@ Saltarse esto llevó el hero de 60 fps a 6 fps.
 
 ## Pendiente
 
-- Fotografía real de la villa en lugar de `assets/img/villa.svg` (placeholder evidente).
-  El `<img>` y su máscara ya están preparados: basta con cambiar el archivo.
 - Logotipo en archivo. Ahora el wordmark está reconstruido con tipografía.
+- Destino de los CTAs: `Private enquiry` y `Explore the collection` no llevan
+  a ninguna parte.
 - Resto de secciones de la home, según la secuencia del §18 del contexto de marca.

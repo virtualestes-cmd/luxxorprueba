@@ -173,30 +173,34 @@ a { color: inherit; text-decoration: none; }
    4. VILLA
    ------------------------------------------------------------
    Sube y se acerca con el scroll (el gesto del vídeo de referencia).
-   El SVG es un placeholder: se puede sustituir por una fotografía
-   real recortada sin tocar nada más.
+   La imagen viene recortada al edificio (1630x643, ratio 2.535), así que
+   la caja del <img> y la villa coinciden y el encuadre es predecible.
    ============================================================ */
 
 .villa {
   position: absolute;
   left: 50%;
-  bottom: -20vh;
-  width: min(1000px, 84vw);
+  bottom: -14vh;
+  width: min(1250px, 96vw);
+  /* Recorrido corto a propósito: con la fotografía real, un acercamiento
+     fuerte deja la villa en primer plano y se pierde la arquitectura.
+     Al final debe verse entera y grande, con el wordmark sobre la fachada. */
   transform:
-    translate3d(-50%, calc(4vh - var(--p-villa) * 32vh), 0)
-    scale(calc(1 + var(--p-villa) * 0.85));
+    translate3d(-50%, calc(4vh - var(--p-villa) * 18vh), 0)
+    scale(calc(1 + var(--p-villa) * 0.26));
   transform-origin: 50% 100%;
   will-change: transform;
 }
 
 /* La base se disuelve con una máscara, no con una franja: así la villa
-   "nace" de las nubes sin dejar ningún borde recto. */
+   "nace" de las nubes sin dejar ningún borde recto. El fundido arranca en
+   el borde de la piscina, que es donde termina el edificio. */
 .villa img {
   display: block;
   width: 100%;
   height: auto;
-  -webkit-mask-image: linear-gradient(180deg, #000 58%, rgba(0,0,0,.55) 80%, transparent 97%);
-          mask-image: linear-gradient(180deg, #000 58%, rgba(0,0,0,.55) 80%, transparent 97%);
+  -webkit-mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.5) 90%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.5) 90%, transparent 100%);
 }
 
 
@@ -473,8 +477,9 @@ a { color: inherit; text-decoration: none; }
   .nav__links { display: none; }
   .nav__cta { padding: .6rem 1.1rem; font-size: .62rem; letter-spacing: .14em; }
   .hero__copy { top: 26vh; }
-  /* en vertical la villa necesita estar más arriba para asomar sobre las nubes */
-  .villa { width: 150vw; bottom: -6vh; }
+  /* La fotografía es panorámica (2.5:1): en vertical hay que ampliarla mucho
+     para que la fachada acristalada central llene la pantalla. */
+  .villa { width: 240vw; bottom: -2vh; }
   .clouds--low { background-size: 400% auto; background-position: 0 64vh; }
   .clouds--high { background-size: 320% auto; }
 }

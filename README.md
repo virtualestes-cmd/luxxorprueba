@@ -30,7 +30,8 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 index.html              Marcado del hero + adelanto de la sección siguiente
 assets/css/styles.css   Todo el diseño y toda la animación
 assets/js/hero.js       Solo calcula el progreso del scroll (0 → 1)
-assets/img/villa.svg    Placeholder de la arquitectura
+assets/img/villa.webp   Fotografía de la villa (lo que carga la web)
+assets/img/villa.png    Original sin recortar, por si hay que re-exportar
 assets/img/clouds-*.png Nubes (lo que carga la web)
 assets/img/clouds-*.svg Fuente de las nubes, para regenerarlas
 ```
@@ -46,9 +47,10 @@ aspecto, solo el CSS.
 - **Velocidad de la animación**: `.hero { height: 320vh }` en el CSS. Más alto = más lento.
 - **Momento de cada fase**: los rangos al final de `hero.js`.
 - **Colores**: las variables de `:root` en el CSS, ya cargadas con la paleta del design system.
-- **Foto real en vez del SVG**: sustituir `assets/img/villa.svg` por una imagen
-  de la villa recortada sobre fondo transparente (PNG/WebP). No hay que tocar
-  el CSS: misma caja, misma máscara de fundido.
+- **Cambiar la fotografía de la villa**: tiene que venir recortada sobre fondo
+  transparente y ajustada al edificio, sin margen sobrante. Al cambiarla hay
+  que actualizar `width`/`height` en el `<img>` y, si la proporción cambia
+  mucho, el `width` y el `bottom` de `.villa` en el CSS.
 
 ## Design system
 
@@ -95,6 +97,6 @@ tercero, hay que descargarlas a `assets/fonts/` y declararlas con `@font-face`.
 
 ## Pendiente
 
-- Fotografía real de arquitectura en lugar del SVG.
+- Logotipo en archivo (el wordmark está reconstruido con tipografía).
 - Resto de secciones de la home.
-- Textos definitivos (los actuales son de trabajo).
+- Destino de los CTAs.
