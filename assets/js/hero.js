@@ -46,9 +46,9 @@
     stage.style.setProperty('--p-copy',     ease(range(p, 0.00, 0.26)).toFixed(4)); // se va el titular
     stage.style.setProperty('--p-villa',    ease(range(p, 0.00, 0.70)).toFixed(4)); // sube la villa y sale por arriba
     stage.style.setProperty('--p-clouds',   ease(range(p, 0.16, 0.62)).toFixed(4)); // el mar de nubes la cubre
-    stage.style.setProperty('--p-mark',     ease(range(p, 0.54, 0.74)).toFixed(4)); // el nombre aparece, tenue
-    stage.style.setProperty('--p-veil',     ease(range(p, 0.64, 0.88)).toFixed(4)); // el blanco cubre la escena
-    stage.style.setProperty('--p-settle',   ease(range(p, 0.76, 0.94)).toFixed(4)); // el nombre se asienta sobre el blanco
+    stage.style.setProperty('--p-mark',     ease(range(p, 0.44, 0.62)).toFixed(4)); // el nombre se insinúa
+    stage.style.setProperty('--p-settle',   ease(range(p, 0.58, 0.76)).toFixed(4)); // el nombre a presencia plena
+    stage.style.setProperty('--p-veil',     ease(range(p, 0.80, 0.98)).toFixed(4)); // las nubes se lo tragan
   }
 
   function onScroll() {

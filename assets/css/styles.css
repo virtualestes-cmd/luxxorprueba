@@ -14,6 +14,7 @@
   /* Tipografía (§5) */
   --serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --display:'Playfair Display', 'Cormorant Garamond', Georgia, serif;
 
   /* Progreso del scroll del hero: 0 = arriba del todo, 1 = hero consumido.
      Lo actualiza assets/js/hero.js */
@@ -23,9 +24,9 @@
   --p-copy:     0;  /* 0 → 0.26   : desaparición del titular */
   --p-villa:    0;  /* 0 → 0.70   : la villa asciende y sale por arriba */
   --p-clouds:   0;  /* 0.16 → 0.62: el mar de nubes se traga la villa */
-  --p-mark:     0;  /* 0.54 → 0.74: el nombre aparece, tenue, sobre el cielo */
-  --p-veil:     0;  /* 0.64 → 0.88: el blanco cubre la escena */
-  --p-settle:   0;  /* 0.76 → 0.94: el nombre se asienta sobre el blanco */
+  --p-mark:     0;  /* 0.44 → 0.62: el nombre se insinúa sobre el cielo */
+  --p-settle:   0;  /* 0.58 → 0.76: el nombre llega a presencia plena */
+  --p-veil:     0;  /* 0.80 → 0.98: las nubes se lo tragan y entregan la pantalla */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -374,14 +375,14 @@ a { color: inherit; text-decoration: none; }
    referencia, y evita que quede una pantalla marfil vacía. */
 .wordmark {
   position: absolute;
-  z-index: 7;
+  z-index: 4;
   left: 50%;
   top: 47%;
   width: 100%;
   text-align: center;
   transform: translate3d(-50%, calc(-50% + (1 - var(--p-settle)) * 2.5vh), 0);
-  /* Primero se insinúa sobre el cielo; con el blanco ya puesto, presencia plena. */
-  opacity: calc(var(--p-mark) * 0.42 + var(--p-settle) * 0.58);
+  /* Primero apenas se intuye entre las nubes; luego, presencia plena. */
+  opacity: calc(var(--p-mark) * 0.34 + var(--p-settle) * 0.66);
   will-change: transform, opacity;
 }
 
@@ -392,31 +393,27 @@ a { color: inherit; text-decoration: none; }
    ampliada (no "cover") para que se vean fachadas y ventanas dentro de los
    glifos; a tamaño "cover" la villa entera cabía dentro de una letra y no
    se reconocía nada. */
+/* Grueso y ancho, no alto: el logotipo tiene astas robustas y mucho tracking.
+   Todas las letras llevan la fotografía dentro —también las XX— porque es el
+   efecto espejo de la referencia; el dorado se queda en el logotipo de la
+   navegación, donde sí manda. */
 .wordmark__word {
   display: block;
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(4.4rem, 21vw, 21rem);
-  line-height: .88;
-  letter-spacing: .04em;
-  text-indent: .04em;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(3rem, 13.5vw, 13rem);
+  line-height: .94;
+  letter-spacing: .10em;
+  text-indent: .10em;
 
   background-image:
-    linear-gradient(rgba(6, 27, 54, .22), rgba(6, 27, 54, .22)),
+    linear-gradient(rgba(6, 27, 54, .18), rgba(6, 27, 54, .18)),
     url('../img/villa.webp');
-  background-size: 260% auto;
-  background-position: 48% 66%;
+  background-size: 210% auto;
+  background-position: 50% 64%;
   -webkit-background-clip: text;
           background-clip: text;
   color: transparent;
-}
-
-/* Las XX se quedan en dorado sólido: es el rasgo del logotipo y el único
-   sitio donde el dorado manda. */
-.wordmark__word em {
-  font-style: normal;
-  color: var(--gold);
-  -webkit-text-fill-color: var(--gold);
 }
 
 .wordmark__descriptor {
@@ -494,14 +491,16 @@ a { color: inherit; text-decoration: none; }
   inset: 0;
   z-index: 6;
   pointer-events: none;
-  /* Las paradas suben con el progreso: empieza como una neblina baja
-     y termina cubriendo la pantalla entera. */
-  background: linear-gradient(
-    180deg,
-    rgba(232, 224, 210, 0) calc(30% - var(--p-veil) * 60%),
-    #E8E0D2               calc(70% - var(--p-veil) * 70%),
-    var(--ivory)          calc(100% - var(--p-veil) * 60%)
-  );
+  /* Nubes, no un blanco plano: el borde que avanza tiene silueta. Las paradas
+     del degradado suben con el progreso hasta cubrir la pantalla entera. */
+  background:
+    url('../img/clouds-front.png') repeat-x 50% calc(88% - var(--p-veil) * 78%) / 240% auto,
+    linear-gradient(
+      180deg,
+      rgba(232, 224, 210, 0) calc(34% - var(--p-veil) * 64%),
+      #EDE6DA               calc(72% - var(--p-veil) * 72%),
+      var(--ivory)          calc(100% - var(--p-veil) * 62%)
+    );
   opacity: var(--p-veil);
 }
 

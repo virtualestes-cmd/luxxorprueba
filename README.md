@@ -21,13 +21,9 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 | 0 → 0.26 | El titular y la navegación se desvanecen |
 | 0 → 0.70 | La villa asciende, se acerca y sale por arriba |
 | 0.16 → 0.62 | El mar de nubes sube y se traga la villa |
-| 0.54 → 0.74 | El nombre **LUXXOR PROJECTS** aparece tenue sobre el cielo, con la fotografía dentro de las letras |
-| 0.64 → 0.88 | Un velo marfil cubre la escena |
-| 0.76 → 0.94 | El nombre se asienta a presencia plena sobre el blanco y entra **Real Estate** |
-
-El nombre no se marcha cuando llega el blanco: se queda y termina de
-asentarse encima, como en la referencia. Si se fuera, la última pantalla del
-hero quedaría marfil y vacía.
+| 0.44 → 0.62 | El nombre **LUXXOR** se insinúa entre las nubes, apenas visible |
+| 0.58 → 0.76 | Llega a presencia plena, con la arquitectura dentro de las letras |
+| 0.80 → 0.98 | Las nubes suben y se lo tragan, entregando la pantalla a la sección siguiente |
 
 Después del hero vienen dos secciones: el **reel** (pieza en movimiento, ahora
 con un vídeo pendiente) y la **introducción a Luxxor**.
@@ -108,8 +104,13 @@ tercero, hay que descargarlas a `assets/fonts/` y declararlas con `@font-face`.
 
 Las letras no son texto de color: son una ventana a `villa.webp`. El fondo de
 la caja se recorta a la forma de los glifos con `background-clip: text`, y el
-texto va en `transparent`. Las XX se quedan en dorado sólido porque son el
-rasgo del logotipo.
+texto va en `transparent`. **Todas** las letras llevan la fotografía dentro,
+también las XX: el dorado se queda en el logotipo de la navegación, que es
+donde el sistema visual lo pide.
+
+Va en Playfair Display 700, no en Cormorant: el logotipo tiene astas robustas
+y Cormorant es de trazo fino. Y es ancho más que alto —tamaño contenido con
+mucho tracking—, como el logotipo.
 
 La imagen va **ampliada** (`background-size: 260%`), no en `cover`: a tamaño
 `cover` la villa entera cabía dentro de una sola letra y no se reconocía nada.
