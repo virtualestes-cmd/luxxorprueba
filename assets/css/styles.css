@@ -20,11 +20,12 @@
   --p: 0;
 
   /* Sub-progresos derivados, para no repetir clamps por todas partes */
-  --p-copy:     0;  /* 0 → 0.30  : desaparición del titular */
-  --p-villa:    0;  /* 0 → 0.80  : ascenso y acercamiento de la villa */
-  --p-mark:     0;  /* 0.32 → 0.58: entrada del wordmark */
-  --p-mark-out: 0;  /* 0.78 → 0.95: salida del wordmark */
-  --p-veil:     0;  /* 0.72 → 1   : velo final */
+  --p-copy:     0;  /* 0 → 0.26   : desaparición del titular */
+  --p-villa:    0;  /* 0 → 0.70   : la villa asciende y sale por arriba */
+  --p-clouds:   0;  /* 0.16 → 0.62: el mar de nubes se traga la villa */
+  --p-mark:     0;  /* 0.60 → 0.80: entrada del wordmark */
+  --p-mark-out: 0;  /* 0.88 → 0.99: salida del wordmark */
+  --p-veil:     0;  /* 0.84 → 1   : velo final */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -120,7 +121,9 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   inset: 0;
   pointer-events: none;
-  overflow: hidden;
+  /* Sin overflow: hidden. Recortar aquí significa recortar en el espacio
+     local de la capa, y al escalarla el borde del recorte entra en pantalla
+     como una línea recta. Del recorte ya se encarga .hero__stage. */
 }
 
 /* Capa interior: cuatro pantallas de ancho, con la textura repetida. Es la
@@ -132,7 +135,10 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   left: 0;
   width: 400%;
-  height: 100%;
+  /* Más alta que la pantalla: el fondo solo se pinta dentro de la caja del
+     elemento, así que si la caja mide justo 100% su borde inferior asoma
+     como una línea recta en cuanto la capa sube o escala. */
+  height: 140%;
   background-repeat: repeat-x;
   will-change: transform;
 }
@@ -147,8 +153,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* --- mar de nubes: envuelve la base de la villa y se abre al scrollear --- */
+/* Sube y crece mientras la villa se va, para que la base quede siempre
+   envuelta. El recorrido es contenido a propósito: la textura solo se
+   repite en horizontal, así que si la capa sube demasiado asoma el borde
+   recto del mosaico. */
 .clouds--low {
-  transform: translate3d(0, calc(var(--p) * 5vh), 0) scale(calc(1 + var(--p) * 0.5));
+  transform:
+    translate3d(0, calc(var(--p-clouds) * -26vh), 0)
+    scale(calc(1 + var(--p-clouds) * 0.8));
   transform-origin: 50% 100%;
 }
 .clouds--low .clouds__drift {
@@ -182,12 +194,11 @@ a { color: inherit; text-decoration: none; }
   left: 50%;
   bottom: -14vh;
   width: min(1250px, 96vw);
-  /* Recorrido corto a propósito: con la fotografía real, un acercamiento
-     fuerte deja la villa en primer plano y se pierde la arquitectura.
-     Al final debe verse entera y grande, con el wordmark sobre la fachada. */
+  /* Como en la referencia: la villa asciende, se acerca y acaba saliendo por
+     arriba, dejando el cielo limpio para que entre el nombre. */
   transform:
-    translate3d(-50%, calc(4vh - var(--p-villa) * 18vh), 0)
-    scale(calc(1 + var(--p-villa) * 0.26));
+    translate3d(-50%, calc(4vh - var(--p-villa) * 118vh), 0)
+    scale(calc(1 + var(--p-villa) * 0.5));
   transform-origin: 50% 100%;
   will-change: transform;
 }
@@ -199,8 +210,10 @@ a { color: inherit; text-decoration: none; }
   display: block;
   width: 100%;
   height: auto;
-  -webkit-mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.5) 90%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.5) 90%, transparent 100%);
+  /* Fundido largo: la villa acaba cruzando la pantalla entera al salir por
+     arriba, y con un fundido corto su base se ve como un recorte. */
+  -webkit-mask-image: linear-gradient(180deg, #000 40%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.18) 88%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 40%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.18) 88%, transparent 100%);
 }
 
 
@@ -334,7 +347,7 @@ a { color: inherit; text-decoration: none; }
 
 .wordmark {
   position: absolute;
-  z-index: 3;
+  z-index: 4;   /* por encima del mar de nubes, que para entonces lo cubre todo */
   left: 50%;
   top: 40%;
   width: 100%;
@@ -346,19 +359,35 @@ a { color: inherit; text-decoration: none; }
   will-change: transform, opacity;
 }
 
-/* Para cuando aparece el wordmark el cielo ya está claro, así que va en
-   navy con las XX doradas — la versión del logo para fondos claros. */
+/* Las letras son una ventana a la fotografía: el fondo de la caja se recorta
+   a la forma de los glifos con background-clip. La imagen se posiciona sobre
+   la fachada acristalada, que es la zona con más detalle y contraste. */
 .wordmark__word {
   display: block;
   font-family: var(--serif);
-  font-weight: 500;
+  font-weight: 600;
   font-size: clamp(3.6rem, 15vw, 13rem);
   line-height: .92;
-  color: var(--navy);
   letter-spacing: calc(.16em - var(--p-mark) * .08em);
   text-indent: calc(.16em - var(--p-mark) * .08em);
+
+  background-image:
+    linear-gradient(rgba(6, 27, 54, .30), rgba(6, 27, 54, .30)),
+    url('../img/villa.webp');
+  background-size: cover;
+  background-position: center 62%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
 }
-.wordmark__word em { font-style: normal; color: var(--gold); }
+
+/* Las XX se quedan en dorado sólido: es el rasgo del logotipo y el único
+   sitio donde el dorado manda. */
+.wordmark__word em {
+  font-style: normal;
+  color: var(--gold);
+  -webkit-text-fill-color: var(--gold);
+}
 
 .wordmark__descriptor {
   display: block;
@@ -433,7 +462,97 @@ a { color: inherit; text-decoration: none; }
 
 
 /* ============================================================
-   10. SECCIÓN SIGUIENTE (adelanto)
+   10. ELEMENTOS COMPARTIDOS DE LAS SECCIONES
+   ============================================================ */
+
+.eyebrow {
+  font-size: .68rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.8rem;
+}
+
+/* Botón sobre fondo claro */
+.btn--dark {
+  border-color: rgba(22, 25, 29, .35);
+  color: var(--carbon);
+  background: transparent;
+}
+.btn--dark:hover { background: var(--navy); border-color: var(--navy); color: var(--ivory); }
+
+
+/* ============================================================
+   11. REEL — pieza en movimiento tras el hero
+   ============================================================ */
+
+.reel {
+  position: relative;
+  z-index: 1;
+  background: var(--ivory);
+  color: var(--carbon);
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.5rem, 8vw, 10rem) clamp(5rem, 12vh, 8rem);
+}
+
+.reel__head { max-width: 24em; margin-bottom: clamp(2.5rem, 6vh, 4.5rem); }
+
+.reel__title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(1.9rem, 4.4vw, 3.4rem);
+  line-height: 1.14;
+}
+
+/* El marco define la caja aunque el vídeo todavía no exista: así el hueco
+   no colapsa y el aviso de placeholder queda centrado. */
+.reel__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--navy);
+  border: 1px solid rgba(214, 163, 74, .28);
+}
+
+.reel__video {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Debajo del vídeo: solo se ve mientras no haya metraje. */
+.reel__placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .9rem;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: .74rem;
+  letter-spacing: .06em;
+  color: rgba(245, 242, 234, .5);
+}
+.reel__placeholder span {
+  font-size: .64rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.reel__placeholder code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .72rem;
+  color: rgba(245, 242, 234, .72);
+}
+
+
+/* ============================================================
+   12. INTRODUCCIÓN A LUXXOR
    ============================================================ */
 
 .intro {
@@ -441,15 +560,7 @@ a { color: inherit; text-decoration: none; }
   z-index: 1;
   background: var(--ivory);
   color: var(--carbon);
-  padding: clamp(6rem, 16vh, 12rem) clamp(1.5rem, 8vw, 10rem) clamp(8rem, 20vh, 14rem);
-}
-
-.intro__eyebrow {
-  font-size: .68rem;
-  letter-spacing: .32em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 2.2rem;
+  padding: clamp(4rem, 10vh, 7rem) clamp(1.5rem, 8vw, 10rem) clamp(8rem, 20vh, 14rem);
 }
 
 .intro__title {
@@ -457,20 +568,46 @@ a { color: inherit; text-decoration: none; }
   font-weight: 300;
   font-size: clamp(2rem, 5vw, 3.8rem);
   line-height: 1.12;
-  max-width: 18em;
+  max-width: 16em;
 }
+
+.intro__body { max-width: 46ch; }
 
 .intro__text {
   margin-top: 2rem;
-  max-width: 46ch;
   font-size: 1rem;
   line-height: 1.85;
   color: rgba(22, 25, 29, .72);
 }
 
+/* Las cuatro verticales, en una lista sobria con filete dorado */
+.verticals {
+  list-style: none;
+  margin: 3rem 0 3.2rem;
+  border-top: 1px solid rgba(22, 25, 29, .12);
+}
+.verticals li {
+  display: flex;
+  gap: 1.4rem;
+  align-items: baseline;
+  padding: .95rem 0;
+  border-bottom: 1px solid rgba(22, 25, 29, .12);
+  font-size: .84rem;
+  letter-spacing: .04em;
+  color: rgba(22, 25, 29, .6);
+}
+.verticals span {
+  flex: 0 0 7.5rem;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--carbon);
+}
+
 
 /* ============================================================
-   11. RESPONSIVE
+   13. RESPONSIVE
    ============================================================ */
 
 @media (max-width: 900px) {
@@ -482,11 +619,13 @@ a { color: inherit; text-decoration: none; }
   .villa { width: 240vw; bottom: -2vh; }
   .clouds--low { background-size: 400% auto; background-position: 0 64vh; }
   .clouds--high { background-size: 320% auto; }
+  .verticals li { flex-direction: column; gap: .3rem; }
+  .verticals span { flex: none; }
 }
 
 
 /* ============================================================
-   12. ACCESIBILIDAD — sin movimiento
+   14. ACCESIBILIDAD — sin movimiento
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {

@@ -18,22 +18,27 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 
 | Progreso | Qué ocurre |
 |---------:|------------|
-| 0 → 0.30 | El titular y la navegación se desvanecen y se difuminan |
-| 0 → 0.80 | La villa asciende y se acerca; las nubes se abren |
-| 0.32 → 0.58 | Entra el wordmark **LUXXOR PROJECTS** a pantalla completa |
-| 0.78 → 0.95 | El wordmark se va |
-| 0.72 → 1.00 | Un velo marfil entrega la pantalla a la siguiente sección |
+| 0 → 0.26 | El titular y la navegación se desvanecen |
+| 0 → 0.70 | La villa asciende, se acerca y sale por arriba |
+| 0.16 → 0.62 | El mar de nubes sube y se traga la villa |
+| 0.60 → 0.80 | Entra el wordmark **LUXXOR PROJECTS**, con la fotografía dentro de las letras |
+| 0.88 → 0.99 | El wordmark se va |
+| 0.84 → 1.00 | Un velo marfil entrega la pantalla a la sección siguiente |
+
+Después del hero vienen dos secciones: el **reel** (pieza en movimiento, ahora
+con un vídeo pendiente) y la **introducción a Luxxor**.
 
 ## Estructura
 
 ```
-index.html              Marcado del hero + adelanto de la sección siguiente
+index.html              Hero + reel + introducción
 assets/css/styles.css   Todo el diseño y toda la animación
 assets/js/hero.js       Solo calcula el progreso del scroll (0 → 1)
 assets/img/villa.webp   Fotografía de la villa (lo que carga la web)
 assets/img/villa.png    Original sin recortar, por si hay que re-exportar
 assets/img/clouds-*.png Nubes (lo que carga la web)
 assets/img/clouds-*.svg Fuente de las nubes, para regenerarlas
+assets/video/           Metraje del reel (ver el README de la carpeta)
 ```
 
 El reparto es a propósito: **el JS no anima nada**. Publica el progreso del
@@ -95,8 +100,18 @@ Medido con scroll automatizado a 1440x900 y sin GPU: de 168 ms por fotograma
 Las tipografías se cargan desde Google Fonts. Si se prefiere no depender de un
 tercero, hay que descargarlas a `assets/fonts/` y declararlas con `@font-face`.
 
+## El wordmark con la fotografía dentro
+
+Las letras no son texto de color: son una ventana a `villa.webp`. El fondo de
+la caja se recorta a la forma de los glifos con `background-clip: text`, y el
+texto va en `transparent`. Las XX se quedan en dorado sólido porque son el
+rasgo del logotipo. Para cambiar qué se ve dentro de las letras basta con
+cambiar la imagen y el `background-position` de `.wordmark__word`.
+
 ## Pendiente
 
+- **Metraje del reel**: dejar `assets/video/reel.mp4`. Mientras no exista se
+  ve un placeholder marcado.
 - Logotipo en archivo (el wordmark está reconstruido con tipografía).
 - Resto de secciones de la home.
 - Destino de los CTAs.

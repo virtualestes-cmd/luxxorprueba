@@ -62,7 +62,9 @@
         <a class="btn" href="#">Explore the collection <span class="btn__arrow">&#8594;</span></a>
       </div>
 
-      <!-- Wordmark que aparece al scrollear -->
+      <!-- Wordmark. Aparece cuando el mar de nubes ya se ha tragado la villa,
+           y las letras se rellenan con la propia fotografía: la arquitectura
+           se ve por dentro del nombre. -->
       <div class="wordmark" aria-hidden="true">
         <span class="wordmark__word">LU<em>XX</em>OR</span>
         <span class="wordmark__descriptor">Projects</span>
@@ -81,15 +83,52 @@
   </div>
 
   <!-- ============================================================
-       SIGUIENTE SECCIÓN (solo un adelanto, para ver la transición)
+       REEL — pieza en movimiento tras el hero
+       El vídeo es un marcador de posición hasta tener metraje propio.
+       Basta con dejar el archivo en assets/video/ con este nombre.
+       ============================================================ -->
+  <section class="reel">
+    <div class="reel__head">
+      <p class="eyebrow">Global presence</p>
+      <h2 class="reel__title">Real estate without borders.</h2>
+    </div>
+
+    <figure class="reel__frame">
+      <video class="reel__video" autoplay muted loop playsinline preload="metadata"
+             poster="assets/img/reel-poster.webp" aria-label="Vista de ciudad">
+        <source src="assets/video/reel.mp4" type="video/mp4">
+      </video>
+      <p class="reel__placeholder" role="status">
+        <span>Placeholder</span>
+        Pendiente de metraje propio · <code>assets/video/reel.mp4</code>
+      </p>
+    </figure>
+  </section>
+
+  <!-- ============================================================
+       INTRODUCCIÓN A LUXXOR (§18 del contexto de marca)
        ============================================================ -->
   <section class="intro">
-    <p class="intro__eyebrow">Luxxor Projects</p>
+    <p class="eyebrow eyebrow--dark">Luxxor</p>
     <h2 class="intro__title">We don't list everything.<br>We select what matters.</h2>
-    <p class="intro__text">
-      Opportunities move privately, through the people who already hold the relationship.
-      Access, not listings.
-    </p>
+    <div class="intro__body">
+      <p class="intro__text">
+        Luxxor connects owners, investors and partners across private markets. An opportunity
+        travels through the network — brokers, concierges, family offices, partners — before it
+        ever becomes a listing.
+      </p>
+      <p class="intro__text">
+        Four verticals, one way of working: property and investment, private stays, hospitality,
+        and the training that holds it together.
+      </p>
+      <ul class="verticals">
+        <li><span>Projects</span> Assets &amp; investment</li>
+        <li><span>Vacation</span> Private stays</li>
+        <li><span>Hotels</span> Hospitality</li>
+        <li><span>Academy</span> Internal training</li>
+      </ul>
+      <a class="btn btn--dark" href="#">Private enquiry <span class="btn__arrow">&#8594;</span></a>
+    </div>
   </section>
 
   <script src="assets/js/hero.js"></script>

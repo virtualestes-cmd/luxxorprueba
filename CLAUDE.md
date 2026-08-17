@@ -47,15 +47,16 @@ partículas ni glassmorphism.
 Landing estática, sin build ni dependencias. Se abre `index.html` y ya.
 
 ```
-index.html              Hero animado + adelanto de la sección siguiente
+index.html              Hero animado + reel + introducción a Luxxor
 assets/css/styles.css   Diseño y animación completos
 assets/js/hero.js       Solo publica el progreso del scroll como variables CSS
 assets/img/             Fotografía de la villa y nubes
+assets/video/           Metraje del reel (pendiente)
 docs/                   Contexto de marca
 ```
 
 El JS no anima nada: calcula el progreso del scroll (0 → 1) y lo expone en `--p`,
-`--p-copy`, `--p-villa`, `--p-mark`, `--p-mark-out`, `--p-veil`. Toda la animación vive en
+`--p-copy`, `--p-villa`, `--p-clouds`, `--p-mark`, `--p-mark-out`, `--p-veil`. Toda la animación vive en
 el CSS. Para cambiar el ritmo se tocan los tramos de `hero.js`; para el aspecto, el CSS.
 
 ## Rendimiento del hero
@@ -72,6 +73,7 @@ Saltarse esto llevó el hero de 60 fps a 6 fps.
 ## Pendiente
 
 - Logotipo en archivo. Ahora el wordmark está reconstruido con tipografía.
+- Metraje del reel: falta `assets/video/reel.mp4`.
 - Destino de los CTAs: `Private enquiry` y `Explore the collection` no llevan
   a ninguna parte.
 - Resto de secciones de la home, según la secuencia del §18 del contexto de marca.

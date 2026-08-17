@@ -43,11 +43,12 @@
     stage.style.setProperty('--p', p.toFixed(4));
 
     // Tramos de la secuencia (los mismos beats que el vídeo de referencia)
-    stage.style.setProperty('--p-copy',     ease(range(p, 0.00, 0.30)).toFixed(4)); // se va el titular
-    stage.style.setProperty('--p-villa',    ease(range(p, 0.00, 0.80)).toFixed(4)); // sube la villa
-    stage.style.setProperty('--p-mark',     ease(range(p, 0.32, 0.58)).toFixed(4)); // entra el wordmark
-    stage.style.setProperty('--p-mark-out', ease(range(p, 0.78, 0.95)).toFixed(4)); // sale el wordmark
-    stage.style.setProperty('--p-veil',     ease(range(p, 0.72, 1.00)).toFixed(4)); // velo final
+    stage.style.setProperty('--p-copy',     ease(range(p, 0.00, 0.26)).toFixed(4)); // se va el titular
+    stage.style.setProperty('--p-villa',    ease(range(p, 0.00, 0.70)).toFixed(4)); // sube la villa y sale por arriba
+    stage.style.setProperty('--p-clouds',   ease(range(p, 0.16, 0.62)).toFixed(4)); // el mar de nubes la cubre
+    stage.style.setProperty('--p-mark',     ease(range(p, 0.60, 0.80)).toFixed(4)); // entra el wordmark
+    stage.style.setProperty('--p-mark-out', ease(range(p, 0.88, 0.99)).toFixed(4)); // sale el wordmark
+    stage.style.setProperty('--p-veil',     ease(range(p, 0.84, 1.00)).toFixed(4)); // velo final
   }
 
   function onScroll() {
