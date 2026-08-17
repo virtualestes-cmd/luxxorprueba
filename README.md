@@ -21,9 +21,13 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 | 0 → 0.26 | El titular y la navegación se desvanecen |
 | 0 → 0.70 | La villa asciende, se acerca y sale por arriba |
 | 0.16 → 0.62 | El mar de nubes sube y se traga la villa |
-| 0.60 → 0.80 | Entra el wordmark **LUXXOR PROJECTS**, con la fotografía dentro de las letras |
-| 0.88 → 0.99 | El wordmark se va |
-| 0.84 → 1.00 | Un velo marfil entrega la pantalla a la sección siguiente |
+| 0.54 → 0.74 | El nombre **LUXXOR PROJECTS** aparece tenue sobre el cielo, con la fotografía dentro de las letras |
+| 0.64 → 0.88 | Un velo marfil cubre la escena |
+| 0.76 → 0.94 | El nombre se asienta a presencia plena sobre el blanco y entra **REAL ESTATE** |
+
+El nombre no se marcha cuando llega el blanco: se queda y termina de
+asentarse encima, como en la referencia. Si se fuera, la última pantalla del
+hero quedaría marfil y vacía.
 
 Después del hero vienen dos secciones: el **reel** (pieza en movimiento, ahora
 con un vídeo pendiente) y la **introducción a Luxxor**.
@@ -43,7 +47,7 @@ assets/video/           Metraje del reel (ver el README de la carpeta)
 
 El reparto es a propósito: **el JS no anima nada**. Publica el progreso del
 scroll como variables CSS (`--p`, `--p-copy`, `--p-villa`, `--p-mark`,
-`--p-mark-out`, `--p-veil`) y el CSS decide qué hacer con ellas. Para cambiar
+`--p-veil`, `--p-settle`) y el CSS decide qué hacer con ellas. Para cambiar
 el ritmo de la animación se tocan los tramos en `hero.js`; para cambiar el
 aspecto, solo el CSS.
 
