@@ -170,9 +170,15 @@ cruzaba la pantalla como una franja blanca recta al subir con la villa.
 
 ## La colección de villas
 
-Cuatro propiedades, cada una con sus cinco fotografías en
-`assets/img/villas/<ref>/`. Los datos salen de `docs/villas/<ref>.md`, extraídos
-de los dossiers.
+Seis fichas en rejilla de tres y tres. Cuatro (S023-S026) están completas, con
+sus cinco fotografías en `assets/img/villas/<ref>/` y los datos de
+`docs/villas/<ref>.md`, extraídos de los dossiers.
+
+**S027 y S029 están montadas pero a la espera de material**: se ven en su sitio,
+con la referencia y el hueco de la fotografía marcado, y los campos en raya.
+Nada de datos de relleno. Para completarlas hacen falta las cinco fotos en
+`assets/img/villas/s027/` y `assets/img/villas/s029/` (y su dossier, que no se
+sube al repositorio).
 
 Dos reglas que vienen del cliente y conviene no romper:
 

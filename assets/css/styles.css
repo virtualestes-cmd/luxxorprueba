@@ -679,6 +679,34 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: clamp(2rem, 4vw, 3.5rem);
 }
+/* Tres y tres. Con auto-fit, una pantalla muy ancha metía cuatro en la
+   primera fila y dejaba dos sueltas debajo. */
+@media (min-width: 1100px) {
+  .collection__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Fichas a la espera de material: se ven en su sitio, con la referencia y el
+   hueco de la fotografía marcado. Sin datos inventados: los campos van en
+   raya hasta que llegue el dossier. */
+.villa-card--pending { background: #FAF7F0; }
+.villa-card--pending .villa-card__open--pending {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(22, 25, 29, .07) 0 10px,
+      rgba(22, 25, 29, .02) 10px 20px);
+  border-bottom: 1px solid rgba(22, 25, 29, .1);
+}
+.villa-card--pending .villa-card__pending-note {
+  font-size: .62rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: rgba(22, 25, 29, .42);
+}
+.villa-card--pending .villa-card__specs dd { color: rgba(22, 25, 29, .35); }
 
 /* --- tarjeta ------------------------------------------------ */
 
