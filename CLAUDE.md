@@ -53,6 +53,8 @@ assets/js/hero.js       Solo publica el progreso del scroll como variables CSS
 assets/js/villas.js     Galería a pantalla completa de cada villa
 assets/img/             Fotografía del hero y nubes
 assets/img/villas/      Fotografías de las villas, una carpeta por referencia
+assets/img/city-*.webp  Skyline que se mueve dentro de las letras del wordmark
+tools/gen-city.py       Genera ese skyline (y reescribe el SVG del index)
 assets/video/           Metraje del reel (pendiente)
 docs/                   Contexto de marca y datos de las villas
 ```
@@ -68,7 +70,8 @@ Son varias capas a pantalla completa. Antes de añadir efectos:
 - Animar **solo `transform` y `opacity`**. Nunca `background-position`,
   `width`, `top` ni similares.
 - **Nada de `filter` ni `backdrop-filter` sobre elementos en movimiento.**
-- **Ningún filtro SVG en caliente**: el ruido de las nubes va horneado a PNG.
+- **Ningún filtro SVG en caliente**: el ruido de las nubes va horneado a PNG y
+  el skyline del wordmark a WebP. Nada de dibujar cientos de `<rect>` en caliente.
 
 Saltarse esto llevó el hero de 60 fps a 6 fps.
 

@@ -41,6 +41,8 @@ assets/img/villa.webp   Fotografía de la villa (lo que carga la web)
 assets/img/villa.png    Original sin recortar, por si hay que re-exportar
 assets/img/clouds-*.png Nubes: high (altas), low (mar de nubes), front (niebla de la base)
 assets/img/clouds-*.svg Fuente de las nubes, para regenerarlas
+assets/img/city-*.webp  Franjas del skyline que va dentro de las letras
+tools/gen-city.py       Genera y hornea esas franjas
 assets/video/           Metraje del reel (ver el README de la carpeta)
 ```
 
@@ -95,7 +97,8 @@ conviene romper:
 2. **Nada de `filter` ni `backdrop-filter` sobre elementos que se mueven.**
    Un `blur()` animado sobre el titular obliga a rasterizarlo en cada
    fotograma.
-3. **Ningún filtro SVG en caliente.** El ruido de las nubes va horneado a PNG.
+3. **Ningún filtro SVG en caliente.** El ruido de las nubes va horneado a PNG,
+   y el skyline del wordmark a WebP.
 
 Medido con scroll automatizado a 1440x900 y sin GPU: de 168 ms por fotograma
 (unos 6 fps) a 17 ms (el techo de 60 fps).
@@ -103,33 +106,49 @@ Medido con scroll automatizado a 1440x900 y sin GPU: de 168 ms por fotograma
 Las tipografías se cargan desde Google Fonts. Si se prefiere no depender de un
 tercero, hay que descargarlas a `assets/fonts/` y declararlas con `@font-face`.
 
-## El wordmark con la fotografía dentro
+## El wordmark con la ciudad dentro
 
-Las letras no son texto de color: son una ventana a `villa.webp`. El fondo de
-la caja se recorta a la forma de los glifos con `background-clip: text`, y el
-texto va en `transparent`. **Todas** las letras llevan la fotografía dentro,
-también las XX: el dorado se queda en el logotipo de la navegación, que es
-donde el sistema visual lo pide.
+Las letras no son texto de color: son una ventana a un skyline que se mueve.
+El recorte lo hace una **máscara SVG cuyo contenido es el propio texto**
+(`<mask id="luxxorMask">`). Con `background-clip: text` dentro de las letras
+solo cabía una imagen fija, y una ciudad quieta dentro del nombre se lee como
+una textura rara; con la máscara se puede meter contenido en movimiento.
 
-**Va en sans, no en serif.** En la referencia el nombre es una sans muy
-gruesa, con las letras anchas y casi pegadas. Con una serif de trazo fino y
-espaciada no hay superficie dentro de los glifos donde se vea la fotografía, y
-el efecto no se lee por mucho que se ajuste el tamaño.
+Dentro hay cinco planos, cada uno con su velocidad, de más lento a más rápido:
+tres franjas de skyline (lejana, media y primer plano) y dos hileras de faros a
+la altura de la calle. El paralaje entre ellas es lo que da profundidad; los
+faros son lo que de verdad se ve moverse cuando el nombre es pequeño.
+
+Cada plano se dibuja **dos veces, desplazado exactamente su propio ancho**: al
+reiniciarse el bucle, el segundo ejemplar cae donde estaba el primero y no hay
+salto.
+
+El cielo de dentro es un atardecer (navy arriba, cálido en el horizonte) a
+propósito: el cielo del hero es azul claro, y si el de dentro fuese parecido las
+letras se perderían contra el fondo. Además justifica las ventanas encendidas.
+
+Las franjas van **horneadas a WebP**, igual que las nubes. Dibujadas como
+varios cientos de `<rect>` costaban un repintado por fotograma. La fuente es
+`tools/gen-city.py`: genera las franjas, las rasteriza con Chromium, las
+recorta a su caja de tinta y reescribe el bloque `<svg class="wordmark__svg">`
+del `index.html`. Para cambiar la ciudad se toca ese script y se vuelve a
+ejecutar; a mano no, el markup está generado.
+
+    python3 tools/gen-city.py     # necesita playwright y pillow
+
+**La tipografía va en sans, no en serif.** En la referencia el nombre es una
+sans muy gruesa, con las letras anchas y casi pegadas. Con una serif de trazo
+fino no hay superficie dentro de los glifos donde se vea nada.
 
 La familia es **Archivo**, que es variable y tiene eje de anchura: con
 `wdth 125` cada glifo se ensancha de verdad y la palabra sigue siendo estrecha.
-Estirar con `scaleX` habría deformado también el espaciado. Las dos X se montan
-ligeramente entre sí, como en el logotipo.
+Estirar con `scaleX` habría deformado también el espaciado. El cuerpo está
+ajustado (212px sobre una caja de 1200) para que LUXXOR quepa entero: a 232px
+medía 1249 y la R se salía.
 
 El bloque son dos líneas, como la referencia: el nombre y **Real Estate**
 debajo, en sans sólida gris, a alrededor del 40% de su altura. El descriptor
 del logotipo se queda en la navegación.
-
-La imagen va **ampliada** (`background-size: 260%`), no en `cover`: a tamaño
-`cover` la villa entera cabía dentro de una sola letra y no se reconocía nada.
-Ampliada se ven fachadas, ventanas e interiores dentro de los glifos, que es
-el efecto de la referencia. Para cambiar qué se ve dentro basta con mover el
-`background-position` de `.wordmark__word`, o cambiar la imagen.
 
 ## Las nubes que tapan la base de la villa
 

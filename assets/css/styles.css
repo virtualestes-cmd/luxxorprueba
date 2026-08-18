@@ -387,50 +387,41 @@ a { color: inherit; text-decoration: none; }
   will-change: transform, opacity;
 }
 
-/* Las letras son una ventana a la fotografía: el fondo de la caja se recorta
-   a la forma de los glifos con background-clip. La imagen se posiciona sobre
-   la fachada acristalada, que es la zona con más detalle y contraste. */
-/* Ocupa el ancho de la pantalla, como en la referencia. La imagen dentro va
-   ampliada (no "cover") para que se vean fachadas y ventanas dentro de los
-   glifos; a tamaño "cover" la villa entera cabía dentro de una letra y no
-   se reconocía nada. */
-/* Letras anchas, palabra estrecha. Archivo es una grotesca variable con eje
-   de anchura: con wdth 125 cada glifo se ensancha de verdad, sin estirar el
-   conjunto. Estirar con scaleX habría deformado también el espaciado. */
-.wordmark__word {
+/* El nombre ya no es texto con un fondo recortado, sino un SVG cuya máscara
+   son las propias letras. Con background-clip solo cabía una imagen fija;
+   la máscara deja meter dentro contenido que se mueve —aquí, un skyline.
+
+   La tipografía es Archivo: variable, con eje de anchura. Con wdth 125 cada
+   glifo se ensancha de verdad y la palabra sigue siendo estrecha; estirar con
+   scaleX habría deformado también el espaciado. */
+.wordmark__svg {
   display: block;
+  width: min(1080px, 88vw);
+  height: auto;
+  margin: 0 auto;
+}
+
+.wordmark__glyphs {
   font-family: var(--display);
   font-weight: 900;
   font-stretch: 125%;
   font-variation-settings: 'wdth' 125, 'wght' 900;
-  font-size: clamp(2.8rem, 10.5vw, 9.5rem);
-  line-height: .92;
-  letter-spacing: -.03em;
-  text-indent: 0;
-
-  background-image:
-    linear-gradient(rgba(6, 27, 54, .12), rgba(6, 27, 54, .12)),
-    url('../img/villa.webp');
-  background-size: 190% auto;
-  background-position: 50% 62%;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
+  /* Ajustado para que LUXXOR quepa entero en el viewBox de 1200: con
+     Archivo a wdth 125 la palabra medía 1249 y la R se cortaba. */
+  font-size: 212px;
+  letter-spacing: -5px;
 }
 
-.wordmark__descriptor {
-  display: block;
-  margin-top: .9em;
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(.72rem, 1.5vw, 1.15rem);
-  text-transform: uppercase;
-  letter-spacing: .58em;
-  text-indent: .58em;
-  /* En el logotipo el descriptor va en dorado, pero a este tamaño cae justo
-     sobre la piedra clara de la villa y se pierde. Navy atenuado mantiene la
-     jerarquía (más discreto que LUXXOR) sin perder legibilidad. */
-  color: rgba(6, 27, 54, .72);
+/* Cada plano del skyline se dibuja dos veces y se desplaza exactamente su
+   propio ancho: al reiniciarse, el segundo ejemplar cae donde estaba el
+   primero y el bucle no salta. Solo se anima transform. */
+.city__band {
+  animation: city-drift var(--dur) linear infinite;
+  will-change: transform;
+}
+@keyframes city-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(var(--w) * -1)); }
 }
 
 /* Segunda línea, como en la referencia: sans, sólida, gris oscuro y pegada

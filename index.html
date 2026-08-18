@@ -68,7 +68,10 @@
            y las letras se rellenan con la propia fotografía: la arquitectura
            se ve por dentro del nombre. -->
       <div class="wordmark" aria-hidden="true">
-        <span class="wordmark__word">LU<em>XX</em>OR</span>
+        <!-- La ciudad va DENTRO de las letras: el skyline se recorta con una
+             máscara de texto. Con background-clip solo cabía una imagen fija;
+             una máscara SVG deja meter contenido que se mueve. -->
+      <svg class="wordmark__svg" viewBox="0 58 1200 184" role="img" aria-label="Luxxor"><defs><mask id="luxxorMask"><rect width="1200" height="300" fill="#000"/><text class="wordmark__glyphs" x="600" y="228" text-anchor="middle" fill="#fff">LUXXOR</text></mask></defs><g mask="url(#luxxorMask)"><image href="assets/img/city-sky.webp" x="0" y="0" width="1200" height="300" preserveAspectRatio="none"/><g class="city__band" style="--w:1324px;--dur:110s"><image href="assets/img/city-far.webp" x="0" y="149" width="1312" height="151"/><image href="assets/img/city-far.webp" x="1324" y="149" width="1312" height="151"/></g><g class="city__band" style="--w:1333px;--dur:62s"><image href="assets/img/city-mid.webp" x="0" y="113" width="1321" height="187"/><image href="assets/img/city-mid.webp" x="1333" y="113" width="1321" height="187"/></g><g class="city__band" style="--w:1384px;--dur:34s"><image href="assets/img/city-near.webp" x="0" y="75" width="1364" height="225"/><image href="assets/img/city-near.webp" x="1384" y="75" width="1364" height="225"/></g><g class="city__band" style="--w:1200px;--dur:9s"><image href="assets/img/city-traf1.webp" x="33" y="203" width="1154" height="9"/><image href="assets/img/city-traf1.webp" x="1233" y="203" width="1154" height="9"/></g><g class="city__band" style="--w:1200px;--dur:6.5s"><image href="assets/img/city-traf2.webp" x="36" y="215" width="1089" height="9"/><image href="assets/img/city-traf2.webp" x="1236" y="215" width="1089" height="9"/></g></g></svg>
         <span class="wordmark__sector">Real Estate</span>
       </div>
 
