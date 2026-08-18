@@ -95,10 +95,10 @@
        detrás de una solicitud.
        ============================================================ -->
   <section class="collection" id="collection">
-    <div class="collection__head">
+    <div class="section-head">
       <p class="eyebrow">Selected properties</p>
-      <h2 class="collection__title">A selection of the properties<br>we currently hold.</h2>
-      <p class="collection__intro">
+      <h2 class="section-title">A selection of the properties<br>we currently hold.</h2>
+      <p class="section-lead">
         Every property is listed by reference only. Prices are shared on request.
       </p>
     </div>
@@ -207,13 +207,11 @@
           <a class="btn btn--dark villa-card__cta" href="#">Request price <span class="btn__arrow">&#8594;</span></a>
         </div>
       </article>
-      <!-- S027 y S029: la ficha está montada y a la espera de material. En
-           cuanto lleguen las fotos y el dossier, esta tarjeta pasa a ser
-           igual que las demás. Nada de datos inventados mientras tanto. -->
-      <article class="villa-card villa-card--pending" data-ref="S027">
-        <div class="villa-card__open villa-card__open--pending">
-          <span class="villa-card__pending-note">Photography pending</span>
-        </div>
+      <article class="villa-card" data-ref="S027" data-images="assets/img/villas/s027/01.webp assets/img/villas/s027/02.webp assets/img/villas/s027/03.webp assets/img/villas/s027/04.webp assets/img/villas/s027/05.webp">
+        <button class="villa-card__open" type="button" aria-label="Open S027 gallery">
+          <img src="assets/img/villas/s027/01.webp" alt="" loading="lazy" width="1600" height="900">
+          <span class="villa-card__count">5 photos</span>
+        </button>
         <div class="villa-card__body">
           <div class="villa-card__head">
             <h3 class="villa-card__ref">S027</h3>
@@ -228,10 +226,11 @@
           <a class="btn btn--dark villa-card__cta" href="#">Request details <span class="btn__arrow">&#8594;</span></a>
         </div>
       </article>
-      <article class="villa-card villa-card--pending" data-ref="S029">
-        <div class="villa-card__open villa-card__open--pending">
-          <span class="villa-card__pending-note">Photography pending</span>
-        </div>
+      <article class="villa-card" data-ref="S029" data-images="assets/img/villas/s029/01.webp assets/img/villas/s029/02.webp assets/img/villas/s029/03.webp assets/img/villas/s029/04.webp assets/img/villas/s029/05.webp">
+        <button class="villa-card__open" type="button" aria-label="Open S029 gallery">
+          <img src="assets/img/villas/s029/01.webp" alt="" loading="lazy" width="1600" height="900">
+          <span class="villa-card__count">5 photos</span>
+        </button>
         <div class="villa-card__body">
           <div class="villa-card__head">
             <h3 class="villa-card__ref">S029</h3>
@@ -273,11 +272,6 @@
        Basta con dejar el archivo en assets/video/ con este nombre.
        ============================================================ -->
   <section class="reel">
-    <div class="reel__head">
-      <p class="eyebrow">Global presence</p>
-      <h2 class="reel__title">Real estate without borders.</h2>
-    </div>
-
     <figure class="reel__frame">
       <video class="reel__video" autoplay muted loop playsinline preload="metadata"
              poster="assets/img/reel-poster.webp" aria-label="Vista de ciudad">
@@ -291,20 +285,50 @@
   </section>
 
   <!-- ============================================================
-       INTRODUCCIÓN A LUXXOR (§18 del contexto de marca)
+       QUIÉNES SOMOS
+       Todo lo que se afirma aquí sale del contexto de marca
+       (docs/luxxor-brand-context.md §1, §2, §7, §8, §10). Ni una cifra,
+       ni un premio, ni un año de experiencia: no los tenemos.
        ============================================================ -->
-  <section class="intro">
-    <p class="eyebrow eyebrow--dark">Luxxor</p>
-    <h2 class="intro__title">We don't list everything.<br>We select what matters.</h2>
-    <div class="intro__body">
-      <p class="intro__text">
-        Luxxor connects owners, investors and partners across private markets. An opportunity
-        travels through the network — brokers, concierges, family offices, partners — before it
-        ever becomes a listing.
+  <section class="about" id="about">
+    <div class="section-head section-head--light">
+      <p class="eyebrow">Who we are</p>
+      <h2 class="section-title">Not an agency.<br>A network.</h2>
+      <p class="section-lead">
+        Luxxor is an ecosystem built around assets, opportunities and relationships in the
+        premium market. Owners, investors, brokers, concierges, family offices and partners
+        meet at a single point of contact.
       </p>
-      <p class="intro__text">
-        Four verticals, one way of working: property and investment, private stays, hospitality,
-        and the training that holds it together.
+    </div>
+
+    <ul class="pillars">
+      <li class="pillar">
+        <h3 class="pillar__title">Access</h3>
+        <p class="pillar__text">
+          We create and manage access. An opportunity travels through the network before it
+          ever becomes a listing.
+        </p>
+      </li>
+      <li class="pillar">
+        <h3 class="pillar__title">Discretion</h3>
+        <p class="pillar__text">
+          Every property is presented by reference. Names, prices and terms stay between the
+          parties involved.
+        </p>
+      </li>
+      <li class="pillar">
+        <h3 class="pillar__title">Selection</h3>
+        <p class="pillar__text">
+          We don't publish everything we are shown. What we hold, we present ourselves, one
+          property at a time.
+        </p>
+      </li>
+    </ul>
+
+    <div class="ecosystem">
+      <p class="ecosystem__note">
+        Four verticals, one way of working. <strong>Luxxor Projects</strong> is the core of
+        the ecosystem.
       </p>
       <ul class="verticals">
         <li><span>Projects</span> Assets &amp; investment</li>
@@ -312,7 +336,68 @@
         <li><span>Hotels</span> Hospitality</li>
         <li><span>Academy</span> Internal training</li>
       </ul>
-      <a class="btn btn--dark" href="#">Private enquiry <span class="btn__arrow">&#8594;</span></a>
+      <p class="ecosystem__markets">
+        Our markets run across Europe, the Middle East and the Americas.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       QUÉ HACEMOS
+       El esquema del recorrido es literalmente el del §3 del contexto
+       de marca: propietario → Luxxor → red → comprador.
+       ============================================================ -->
+  <section class="what" id="what">
+    <div class="section-head section-head--light">
+      <p class="eyebrow">What we do</p>
+      <h2 class="section-title">We move the asset,<br>not the advertisement.</h2>
+      <p class="section-lead">
+        A property does not wait on a portal for someone to find it. It is taken through a
+        network that already has the buyer.
+      </p>
+    </div>
+
+    <ol class="flow" aria-label="How an opportunity travels">
+      <li class="flow__step"><span class="flow__num">01</span>Owner &amp; asset</li>
+      <li class="flow__step"><span class="flow__num">02</span>Luxxor</li>
+      <li class="flow__step"><span class="flow__num">03</span>International network</li>
+      <li class="flow__step"><span class="flow__num">04</span>Buyer, investor or partner</li>
+    </ol>
+
+    <div class="services">
+      <article class="service">
+        <h3 class="service__title">Asset intake</h3>
+        <p class="service__text">
+          Residential property and investment assets. We study what each one needs — material,
+          presentation, positioning — before it moves anywhere.
+        </p>
+      </article>
+      <article class="service">
+        <h3 class="service__title">Private distribution</h3>
+        <p class="service__text">
+          The opportunity is placed with brokers, agencies, concierges, family offices and
+          partners across our markets. Quietly, and to named people.
+        </p>
+      </article>
+      <article class="service">
+        <h3 class="service__title">Matching &amp; negotiation</h3>
+        <p class="service__text">
+          We introduce the parties that actually fit, and stay in the middle while the terms
+          are agreed.
+        </p>
+      </article>
+      <article class="service">
+        <h3 class="service__title">Confidential close</h3>
+        <p class="service__text">
+          Reference-only presentation, price on request, and the detail of the operation kept
+          between the parties.
+        </p>
+      </article>
+    </div>
+
+    <div class="what__cta">
+      <p class="what__cta-line">Holding an asset, or looking for one?</p>
+      <a class="btn" href="#">Private enquiry <span class="btn__arrow">&#8594;</span></a>
     </div>
   </section>
 

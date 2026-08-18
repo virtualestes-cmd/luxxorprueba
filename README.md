@@ -25,13 +25,15 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 | 0.48 → 0.72 | Coge cuerpo cuando la villa se va: la arquitectura se ve dentro de las letras, con **Real Estate** debajo |
 | 0.78 → 0.97 | Las nubes suben y se lo tragan, entregando la pantalla a la sección siguiente |
 
-Después del hero vienen tres secciones: la **colección** de villas, el **reel**
-(con el vídeo pendiente) y la **introducción a Luxxor**.
+Después del hero vienen cuatro secciones: la **colección** de villas, el **reel**
+(con el vídeo pendiente), **quiénes somos** y **qué hacemos**. Las dos últimas van
+en oscuro: la mitad de arriba de la página es marfil y el sistema visual pide
+navy dominante.
 
 ## Estructura
 
 ```
-index.html              Hero + reel + introducción
+index.html              Hero + colección + reel + quiénes somos + qué hacemos
 assets/css/styles.css   Todo el diseño y toda la animación
 assets/js/hero.js       Solo calcula el progreso del scroll (0 → 1)
 assets/js/villas.js     Galería a pantalla completa de cada villa
@@ -170,15 +172,13 @@ cruzaba la pantalla como una franja blanca recta al subir con la villa.
 
 ## La colección de villas
 
-Seis fichas en rejilla de tres y tres. Cuatro (S023-S026) están completas, con
-sus cinco fotografías en `assets/img/villas/<ref>/` y los datos de
-`docs/villas/<ref>.md`, extraídos de los dossiers.
+Seis fichas en rejilla de tres y tres, cada una con sus cinco fotografías en
+`assets/img/villas/<ref>/`. Los datos salen de `docs/villas/<ref>.md`, extraídos
+de los dossiers.
 
-**S027 y S029 están montadas pero a la espera de material**: se ven en su sitio,
-con la referencia y el hueco de la fotografía marcado, y los campos en raya.
-Nada de datos de relleno. Para completarlas hacen falta las cinco fotos en
-`assets/img/villas/s027/` y `assets/img/villas/s029/` (y su dossier, que no se
-sube al repositorio).
+**S027 y S029 tienen ya la fotografía, pero no el dossier**: se ven completas en
+la rejilla y la galería abre, y los campos de datos van en raya hasta que llegue.
+Nada de datos de relleno.
 
 Dos reglas que vienen del cliente y conviene no romper:
 
@@ -191,6 +191,17 @@ Al pinchar una tarjeta se abre la galería a pantalla completa: flechas, teclado
 y deslizar en táctil. Ojo con `.lightbox[hidden]`: sin esa regla, el
 `display: flex` anula el `hidden` del navegador y la capa se queda encima
 capturando los clics de toda la página.
+
+## Las dos secciones de texto
+
+**Quiénes somos** y **qué hacemos** salen enteras de
+`docs/luxxor-brand-context.md`: el ecosistema y las cuatro verticales (§2), el
+modelo de red (§7), los mercados (§8) y el recorrido de una oportunidad
+—propietario → Luxxor → red → comprador— que está literal en el §3.
+
+Ni una cifra, ni un premio, ni años de experiencia, ni testimonios: no los hay,
+y el contexto de marca prohíbe rellenar con datos inventados. Si hace falta
+añadir algo de eso, primero se pregunta.
 
 ## Pendiente
 
