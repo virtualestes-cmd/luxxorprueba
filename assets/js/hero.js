@@ -43,12 +43,12 @@
     stage.style.setProperty('--p', p.toFixed(4));
 
     // Tramos de la secuencia (los mismos beats que el vídeo de referencia)
-    stage.style.setProperty('--p-copy',     ease(range(p, 0.00, 0.26)).toFixed(4)); // se va el titular
+    stage.style.setProperty('--p-copy',     ease(range(p, 0.00, 0.17)).toFixed(4)); // se va el titular, antes de que asome el nombre
     stage.style.setProperty('--p-villa',    ease(range(p, 0.00, 0.70)).toFixed(4)); // sube la villa y sale por arriba
     stage.style.setProperty('--p-clouds',   ease(range(p, 0.16, 0.62)).toFixed(4)); // el mar de nubes la cubre
-    stage.style.setProperty('--p-mark',     ease(range(p, 0.44, 0.62)).toFixed(4)); // el nombre se insinúa
-    stage.style.setProperty('--p-settle',   ease(range(p, 0.58, 0.76)).toFixed(4)); // el nombre a presencia plena
-    stage.style.setProperty('--p-veil',     ease(range(p, 0.80, 0.98)).toFixed(4)); // las nubes se lo tragan
+    stage.style.setProperty('--p-mark',     ease(range(p, 0.05, 0.24)).toFixed(4)); // el nombre asoma casi al instante, translúcido
+    stage.style.setProperty('--p-settle',   ease(range(p, 0.48, 0.72)).toFixed(4)); // coge cuerpo cuando la villa se va
+    stage.style.setProperty('--p-veil',     ease(range(p, 0.78, 0.97)).toFixed(4)); // las nubes se lo tragan
   }
 
   function onScroll() {

@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Archivo:wdth,wght@125,600..900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -49,7 +49,7 @@
           </span>
         </a>
         <nav class="nav__links" aria-label="Main">
-          <a href="#">Collection</a>
+          <a href="#collection">Collection</a>
           <a href="#">Verticals</a>
           <a href="#">Network</a>
           <a href="#">About</a>
@@ -68,7 +68,7 @@
            y las letras se rellenan con la propia fotografía: la arquitectura
            se ve por dentro del nombre. -->
       <div class="wordmark" aria-hidden="true">
-        <span class="wordmark__word">LUXXOR</span>
+        <span class="wordmark__word">LU<em>XX</em>OR</span>
         <span class="wordmark__sector">Real Estate</span>
       </div>
 
@@ -82,6 +82,147 @@
       <div class="veil" aria-hidden="true"></div>
 
     </div>
+  </div>
+
+
+  <!-- ============================================================
+       COLECCIÓN — cuatro villas seleccionadas
+       Los datos salen de docs/villas/*.md, extraídos de los dossiers.
+       Cada propiedad se identifica solo por su referencia; el precio va
+       detrás de una solicitud.
+       ============================================================ -->
+  <section class="collection" id="collection">
+    <div class="collection__head">
+      <p class="eyebrow">Selected properties</p>
+      <h2 class="collection__title">Four of the properties<br>we currently hold.</h2>
+      <p class="collection__intro">
+        Every property is listed by reference only. Prices are shared on request.
+      </p>
+    </div>
+
+    <div class="collection__grid">
+      <article class="villa-card" data-ref="S023" data-images="assets/img/villas/s023/01.webp assets/img/villas/s023/02.webp assets/img/villas/s023/03.webp assets/img/villas/s023/04.webp assets/img/villas/s023/05.webp">
+        <button class="villa-card__open" type="button" aria-label="Open S023 gallery">
+          <img src="assets/img/villas/s023/01.webp" alt="" loading="lazy" width="1600" height="900">
+          <span class="villa-card__count">5 photos</span>
+        </button>
+        <div class="villa-card__body">
+          <div class="villa-card__head">
+            <h3 class="villa-card__ref">S023</h3>
+            <p class="villa-card__zone">Sa Caleta, Ibiza</p>
+          </div>
+          <dl class="villa-card__specs">
+            <div><dt>Bedrooms</dt><dd>8</dd></div>
+            <div><dt>Bathrooms</dt><dd>8</dd></div>
+            <div><dt>Built</dt><dd>600 m²</dd></div>
+            <div><dt>Plot</dt><dd>16,000 m²</dd></div>
+          </dl>
+          <ul class="villa-card__extras">
+            <li>Finca-style estate</li>
+            <li>Panoramic sea views</li>
+            <li>Steps from the beach</li>
+            <li>Private padel court</li>
+          </ul>
+          <a class="btn btn--dark villa-card__cta" href="#">Request price <span class="btn__arrow">&#8594;</span></a>
+        </div>
+      </article>
+
+      <article class="villa-card" data-ref="S024" data-images="assets/img/villas/s024/01.webp assets/img/villas/s024/02.webp assets/img/villas/s024/03.webp assets/img/villas/s024/04.webp assets/img/villas/s024/05.webp">
+        <button class="villa-card__open" type="button" aria-label="Open S024 gallery">
+          <img src="assets/img/villas/s024/01.webp" alt="" loading="lazy" width="1600" height="900">
+          <span class="villa-card__count">5 photos</span>
+        </button>
+        <div class="villa-card__body">
+          <div class="villa-card__head">
+            <h3 class="villa-card__ref">S024</h3>
+            <p class="villa-card__zone">Es Cubells, Sant Josep</p>
+          </div>
+          <dl class="villa-card__specs">
+            <div><dt>Bedrooms</dt><dd>4</dd></div>
+            <div><dt>Bathrooms</dt><dd>4</dd></div>
+            <div><dt>Built</dt><dd>250 m²</dd></div>
+            <div><dt>Plot</dt><dd>1,200 m²</dd></div>
+          </dl>
+          <ul class="villa-card__extras">
+            <li>Gated community, 24h security</li>
+            <li>Infinity pool</li>
+            <li>Covered outdoor lounge and bar</li>
+            <li>Beside the Es Torrent access</li>
+          </ul>
+          <a class="btn btn--dark villa-card__cta" href="#">Request price <span class="btn__arrow">&#8594;</span></a>
+        </div>
+      </article>
+
+      <article class="villa-card" data-ref="S025" data-images="assets/img/villas/s025/01.webp assets/img/villas/s025/02.webp assets/img/villas/s025/03.webp assets/img/villas/s025/04.webp assets/img/villas/s025/05.webp">
+        <button class="villa-card__open" type="button" aria-label="Open S025 gallery">
+          <img src="assets/img/villas/s025/01.webp" alt="" loading="lazy" width="1600" height="900">
+          <span class="villa-card__count">5 photos</span>
+        </button>
+        <div class="villa-card__body">
+          <div class="villa-card__head">
+            <h3 class="villa-card__ref">S025</h3>
+            <p class="villa-card__zone">East coast, Ibiza</p>
+          </div>
+          <dl class="villa-card__specs">
+            <div><dt>Bedrooms</dt><dd>4</dd></div>
+            <div><dt>Bathrooms</dt><dd>4</dd></div>
+            <div><dt>Built</dt><dd>1,990 m²</dd></div>
+            <div><dt>Plot</dt><dd>61,375 m²</dd></div>
+          </dl>
+          <ul class="villa-card__extras">
+            <li>Set on its own private hillside</li>
+            <li>144 m² infinity pool</li>
+            <li>245 m² solarium</li>
+            <li>Advanced home technology</li>
+          </ul>
+          <a class="btn btn--dark villa-card__cta" href="#">Request price <span class="btn__arrow">&#8594;</span></a>
+        </div>
+      </article>
+
+      <article class="villa-card" data-ref="S026" data-images="assets/img/villas/s026/01.webp assets/img/villas/s026/02.webp assets/img/villas/s026/03.webp assets/img/villas/s026/04.webp assets/img/villas/s026/05.webp">
+        <button class="villa-card__open" type="button" aria-label="Open S026 gallery">
+          <img src="assets/img/villas/s026/01.webp" alt="" loading="lazy" width="1600" height="900">
+          <span class="villa-card__count">5 photos</span>
+        </button>
+        <div class="villa-card__body">
+          <div class="villa-card__head">
+            <h3 class="villa-card__ref">S026</h3>
+            <p class="villa-card__zone">Can Rimbau, Ibiza</p>
+          </div>
+          <dl class="villa-card__specs">
+            <div><dt>Bedrooms</dt><dd>6</dd></div>
+            <div><dt>Bathrooms</dt><dd>5</dd></div>
+            <div><dt>Built</dt><dd>355 m²</dd></div>
+            <div><dt>Plot</dt><dd>2,100 m²</dd></div>
+          </dl>
+          <ul class="villa-card__extras">
+            <li>Gated community, 24h security</li>
+            <li>Four expansive terraces</li>
+            <li>Views to Formentera and Dalt Vila</li>
+            <li>Private tennis court</li>
+          </ul>
+          <a class="btn btn--dark villa-card__cta" href="#">Request price <span class="btn__arrow">&#8594;</span></a>
+        </div>
+      </article>
+    </div>
+
+    <div class="collection__more">
+      <a class="btn btn--dark" href="#">View more villas <span class="btn__arrow">&#8594;</span></a>
+    </div>
+  </section>
+
+  <!-- Galería a pantalla completa, la abre assets/js/villas.js -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" type="button" aria-label="Close">&#10005;</button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous">&#8249;</button>
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next">&#8250;</button>
+    <figure class="lightbox__stage">
+      <img class="lightbox__img" src="" alt="">
+      <figcaption class="lightbox__caption">
+        <span class="lightbox__ref"></span>
+        <span class="lightbox__counter"></span>
+      </figcaption>
+    </figure>
   </div>
 
   <!-- ============================================================
@@ -134,5 +275,6 @@
   </section>
 
   <script src="assets/js/hero.js"></script>
+  <script src="assets/js/villas.js"></script>
 </body>
 </html>

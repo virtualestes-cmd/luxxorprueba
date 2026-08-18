@@ -47,12 +47,14 @@ partículas ni glassmorphism.
 Landing estática, sin build ni dependencias. Se abre `index.html` y ya.
 
 ```
-index.html              Hero animado + reel + introducción a Luxxor
+index.html              Hero + colección de villas + reel + introducción
 assets/css/styles.css   Diseño y animación completos
 assets/js/hero.js       Solo publica el progreso del scroll como variables CSS
-assets/img/             Fotografía de la villa y nubes
+assets/js/villas.js     Galería a pantalla completa de cada villa
+assets/img/             Fotografía del hero y nubes
+assets/img/villas/      Fotografías de las villas, una carpeta por referencia
 assets/video/           Metraje del reel (pendiente)
-docs/                   Contexto de marca
+docs/                   Contexto de marca y datos de las villas
 ```
 
 El JS no anima nada: calcula el progreso del scroll (0 → 1) y lo expone en `--p`,
@@ -69,6 +71,17 @@ Son varias capas a pantalla completa. Antes de añadir efectos:
 - **Ningún filtro SVG en caliente**: el ruido de las nubes va horneado a PNG.
 
 Saltarse esto llevó el hero de 60 fps a 6 fps.
+
+## Villas
+
+Los datos publicables de cada una están en `docs/villas/`. Dos reglas del
+cliente:
+
+- **Solo la referencia** (S023, S024…), nunca el nombre comercial del dossier.
+- **El precio no se publica**: va detrás de *Request price*.
+
+Los dossiers llevan precio y contacto y **no se suben al repositorio**, que es
+público.
 
 ## Pendiente
 

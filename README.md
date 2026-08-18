@@ -21,12 +21,12 @@ Al scrollear, la pantalla del hero se queda fija y va pasando esto:
 | 0 → 0.26 | El titular y la navegación se desvanecen |
 | 0 → 0.70 | La villa asciende, se acerca y sale por arriba |
 | 0.16 → 0.62 | El mar de nubes sube y se traga la villa |
-| 0.44 → 0.62 | El nombre **LUXXOR** se insinúa entre las nubes, apenas visible |
-| 0.58 → 0.76 | Llega a presencia plena, con la arquitectura dentro de las letras y **Real Estate** debajo |
-| 0.80 → 0.98 | Las nubes suben y se lo tragan, entregando la pantalla a la sección siguiente |
+| 0.05 → 0.24 | El nombre **LUXXOR** asoma casi al instante, translúcido, por encima de la casa |
+| 0.48 → 0.72 | Coge cuerpo cuando la villa se va: la arquitectura se ve dentro de las letras, con **Real Estate** debajo |
+| 0.78 → 0.97 | Las nubes suben y se lo tragan, entregando la pantalla a la sección siguiente |
 
-Después del hero vienen dos secciones: el **reel** (pieza en movimiento, ahora
-con un vídeo pendiente) y la **introducción a Luxxor**.
+Después del hero vienen tres secciones: la **colección** de villas, el **reel**
+(con el vídeo pendiente) y la **introducción a Luxxor**.
 
 ## Estructura
 
@@ -34,6 +34,9 @@ con un vídeo pendiente) y la **introducción a Luxxor**.
 index.html              Hero + reel + introducción
 assets/css/styles.css   Todo el diseño y toda la animación
 assets/js/hero.js       Solo calcula el progreso del scroll (0 → 1)
+assets/js/villas.js     Galería a pantalla completa de cada villa
+assets/img/villas/      Fotografías, una carpeta por referencia
+docs/villas/            Datos publicables de cada villa
 assets/img/villa.webp   Fotografía de la villa (lo que carga la web)
 assets/img/villa.png    Original sin recortar, por si hay que re-exportar
 assets/img/clouds-*.png Nubes: high (altas), low (mar de nubes), front (niebla de la base)
@@ -109,10 +112,14 @@ también las XX: el dorado se queda en el logotipo de la navegación, que es
 donde el sistema visual lo pide.
 
 **Va en sans, no en serif.** En la referencia el nombre es una sans muy
-gruesa y compacta, con las letras casi pegadas: Inter 900 con tracking
-negativo. Con una serif de trazo fino y espaciada no hay superficie dentro de
-los glifos donde se vea la fotografía, y el efecto no se lee por mucho que se
-ajuste el tamaño.
+gruesa, con las letras anchas y casi pegadas. Con una serif de trazo fino y
+espaciada no hay superficie dentro de los glifos donde se vea la fotografía, y
+el efecto no se lee por mucho que se ajuste el tamaño.
+
+La familia es **Archivo**, que es variable y tiene eje de anchura: con
+`wdth 125` cada glifo se ensancha de verdad y la palabra sigue siendo estrecha.
+Estirar con `scaleX` habría deformado también el espaciado. Las dos X se montan
+ligeramente entre sí, como en el logotipo.
 
 El bloque son dos líneas, como la referencia: el nombre y **Real Estate**
 debajo, en sans sólida gris, a alrededor del 40% de su altura. El descriptor
@@ -142,10 +149,29 @@ como capa suelta costaba 11 ms por fotograma; dentro de la villa, nada.
 Lleva fundido en sus dos bordes. Con el canto inferior lleno, la propia nube
 cruzaba la pantalla como una franja blanca recta al subir con la villa.
 
+## La colección de villas
+
+Cuatro propiedades, cada una con sus cinco fotografías en
+`assets/img/villas/<ref>/`. Los datos salen de `docs/villas/<ref>.md`, extraídos
+de los dossiers.
+
+Dos reglas que vienen del cliente y conviene no romper:
+
+- **Cada propiedad se identifica solo por su referencia** (S023, S024…), nunca
+  por el nombre comercial que figura en el dossier. Es lo que protege la
+  exclusiva.
+- **El precio no se publica.** Va detrás del botón *Request price*.
+
+Al pinchar una tarjeta se abre la galería a pantalla completa: flechas, teclado
+y deslizar en táctil. Ojo con `.lightbox[hidden]`: sin esa regla, el
+`display: flex` anula el `hidden` del navegador y la capa se queda encima
+capturando los clics de toda la página.
+
 ## Pendiente
 
 - **Metraje del reel**: dejar `assets/video/reel.mp4`. Mientras no exista se
   ve un placeholder marcado.
 - Logotipo en archivo (el wordmark está reconstruido con tipografía).
 - Resto de secciones de la home.
-- Destino de los CTAs.
+- Destino de los CTAs y del botón *View more villas* (las 30 y pico restantes).
+- Confirmar si las zonas concretas (Sa Caleta, Can Rimbau…) son publicables.

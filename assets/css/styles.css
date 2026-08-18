@@ -14,19 +14,19 @@
   /* Tipografía (§5) */
   --serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --display: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --display: 'Archivo', 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
 
   /* Progreso del scroll del hero: 0 = arriba del todo, 1 = hero consumido.
      Lo actualiza assets/js/hero.js */
   --p: 0;
 
   /* Sub-progresos derivados, para no repetir clamps por todas partes */
-  --p-copy:     0;  /* 0 → 0.26   : desaparición del titular */
+  --p-copy:     0;  /* 0 → 0.17   : desaparición del titular */
   --p-villa:    0;  /* 0 → 0.70   : la villa asciende y sale por arriba */
   --p-clouds:   0;  /* 0.16 → 0.62: el mar de nubes se traga la villa */
-  --p-mark:     0;  /* 0.44 → 0.62: el nombre se insinúa sobre el cielo */
-  --p-settle:   0;  /* 0.58 → 0.76: el nombre llega a presencia plena */
-  --p-veil:     0;  /* 0.80 → 0.98: las nubes se lo tragan y entregan la pantalla */
+  --p-mark:     0;  /* 0.05 → 0.24: el nombre asoma casi al instante, translúcido */
+  --p-settle:   0;  /* 0.48 → 0.72: coge cuerpo cuando la villa se va */
+  --p-veil:     0;  /* 0.78 → 0.97: las nubes se lo tragan */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -381,8 +381,9 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   text-align: center;
   transform: translate3d(-50%, calc(-50% + (1 - var(--p-settle)) * 2.5vh), 0);
-  /* Primero apenas se intuye entre las nubes; luego, presencia plena. */
-  opacity: calc(var(--p-mark) * 0.34 + var(--p-settle) * 0.66);
+  /* Casi al entrar ya está ahí, pero apenas se ve: un 26% de opacidad sobre
+     la casa. El cuerpo llega después, cuando la villa se ha ido. */
+  opacity: calc(var(--p-mark) * 0.26 + var(--p-settle) * 0.74);
   will-change: transform, opacity;
 }
 
@@ -393,17 +394,18 @@ a { color: inherit; text-decoration: none; }
    ampliada (no "cover") para que se vean fachadas y ventanas dentro de los
    glifos; a tamaño "cover" la villa entera cabía dentro de una letra y no
    se reconocía nada. */
-/* En la referencia el nombre es una sans muy gruesa y compacta, con las
-   letras casi pegadas — no una serif espaciada. El bloque macizo es lo que
-   deja ver la fotografía por dentro: con trazo fino no hay superficie donde
-   se vea nada. */
+/* Letras anchas, palabra estrecha. Archivo es una grotesca variable con eje
+   de anchura: con wdth 125 cada glifo se ensancha de verdad, sin estirar el
+   conjunto. Estirar con scaleX habría deformado también el espaciado. */
 .wordmark__word {
   display: block;
   font-family: var(--display);
   font-weight: 900;
-  font-size: clamp(3.2rem, 13vw, 12rem);
+  font-stretch: 125%;
+  font-variation-settings: 'wdth' 125, 'wght' 900;
+  font-size: clamp(2.8rem, 10.5vw, 9.5rem);
   line-height: .92;
-  letter-spacing: -.015em;
+  letter-spacing: -.03em;
   text-indent: 0;
 
   background-image:
@@ -650,8 +652,244 @@ a { color: inherit; text-decoration: none; }
 }
 
 
+
+
 /* ============================================================
-   13. RESPONSIVE
+   13. COLECCIÓN DE VILLAS
+   ============================================================ */
+
+.collection {
+  position: relative;
+  z-index: 1;
+  background: var(--ivory);
+  color: var(--carbon);
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.5rem, 6vw, 7rem) clamp(4rem, 10vh, 7rem);
+}
+
+.collection__head { max-width: 34em; margin-bottom: clamp(3rem, 7vh, 5rem); }
+
+.collection__title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(1.9rem, 4.4vw, 3.4rem);
+  line-height: 1.14;
+}
+
+.collection__intro {
+  margin-top: 1.6rem;
+  max-width: 42ch;
+  font-size: .95rem;
+  line-height: 1.8;
+  color: rgba(22, 25, 29, .66);
+}
+
+.collection__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* --- tarjeta ------------------------------------------------ */
+
+.villa-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFDF8;
+  border: 1px solid rgba(22, 25, 29, .1);
+}
+
+.villa-card__open {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+.villa-card__open img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s cubic-bezier(.22,.61,.36,1);
+}
+.villa-card__open:hover img,
+.villa-card__open:focus-visible img { transform: scale(1.045); }
+
+.villa-card__count {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: .4rem .8rem;
+  background: rgba(6, 27, 54, .72);
+  color: var(--ivory);
+  font-size: .64rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+.villa-card__open:hover .villa-card__count,
+.villa-card__open:focus-visible .villa-card__count { opacity: 1; }
+
+.villa-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: clamp(1.6rem, 2.6vw, 2.4rem);
+}
+
+.villa-card__head { margin-bottom: 1.6rem; }
+
+.villa-card__ref {
+  font-family: var(--display);
+  font-weight: 700;
+  font-stretch: 112%;
+  font-size: 1.5rem;
+  letter-spacing: .04em;
+}
+
+.villa-card__zone {
+  margin-top: .35rem;
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Datos duros: los del dossier, sin adornos */
+.villa-card__specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .1rem 1.5rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid rgba(22, 25, 29, .12);
+  border-bottom: 1px solid rgba(22, 25, 29, .12);
+}
+.villa-card__specs div { display: flex; justify-content: space-between; gap: 1rem; padding: .35rem 0; }
+.villa-card__specs dt { font-size: .76rem; letter-spacing: .04em; color: rgba(22, 25, 29, .55); }
+.villa-card__specs dd { font-size: .84rem; font-weight: 500; }
+
+.villa-card__extras {
+  list-style: none;
+  margin: 1.4rem 0 2rem;
+  flex: 1;
+}
+.villa-card__extras li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: .55rem;
+  font-size: .84rem;
+  line-height: 1.6;
+  color: rgba(22, 25, 29, .72);
+}
+.villa-card__extras li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: 5px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.villa-card__cta { align-self: flex-start; }
+
+.collection__more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+
+
+/* ============================================================
+   14. GALERÍA A PANTALLA COMPLETA
+   ============================================================ */
+
+/* display:flex anula el hidden del navegador, y la capa se queda encima
+   capturando los clics de toda la página aunque no se vea. */
+.lightbox[hidden] { display: none; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 16, 32, .96);
+  opacity: 0;
+  transition: opacity .32s ease;
+}
+.lightbox.is-open { opacity: 1; }
+
+.lightbox__stage {
+  position: relative;
+  width: min(1400px, 92vw);
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 76vh;
+  object-fit: contain;
+  transform: scale(.985);
+  transition: transform .4s cubic-bezier(.22,.61,.36,1);
+}
+.lightbox.is-open .lightbox__img { transform: scale(1); }
+
+.lightbox__caption {
+  display: flex;
+  align-items: baseline;
+  gap: 1.4rem;
+  color: rgba(245, 242, 234, .72);
+  font-size: .72rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.lightbox__ref { color: var(--gold); }
+
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  z-index: 2;
+  border: 1px solid rgba(245, 242, 234, .26);
+  background: transparent;
+  color: var(--ivory);
+  cursor: pointer;
+  transition: border-color .35s ease, background-color .35s ease, color .35s ease;
+}
+.lightbox__close:hover,
+.lightbox__nav:hover { border-color: var(--gold); background: var(--gold); color: var(--navy); }
+
+.lightbox__close {
+  top: clamp(1rem, 3vh, 2.2rem);
+  right: clamp(1rem, 3vw, 2.2rem);
+  width: 2.9rem;
+  height: 2.9rem;
+  font-size: .9rem;
+}
+
+.lightbox__nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.2rem;
+  height: 3.2rem;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.lightbox__nav--prev { left: clamp(.6rem, 2.5vw, 2.2rem); }
+.lightbox__nav--next { right: clamp(.6rem, 2.5vw, 2.2rem); }
+
+
+/* ============================================================
+   15. RESPONSIVE
    ============================================================ */
 
 @media (max-width: 900px) {
@@ -665,11 +903,15 @@ a { color: inherit; text-decoration: none; }
   .clouds--high { background-size: 320% auto; }
   .verticals li { flex-direction: column; gap: .3rem; }
   .verticals span { flex: none; }
+  .collection__grid { grid-template-columns: 1fr; }
+  .villa-card__specs { grid-template-columns: 1fr; }
+  .villa-card__count { opacity: 1; }
+  .lightbox__nav { width: 2.6rem; height: 2.6rem; font-size: 1.3rem; }
 }
 
 
 /* ============================================================
-   14. ACCESIBILIDAD — sin movimiento
+   16. ACCESIBILIDAD — sin movimiento
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
